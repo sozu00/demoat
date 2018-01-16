@@ -10,15 +10,19 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
 @Entity
-public class Sala {
+public class Consulta {
 
 	@Id
-	Integer roomNumber;
+	Integer id;
+	
+	@OneToMany(fetch = FetchType.LAZY,mappedBy="consulta")
+	List<Cita> citas = new ArrayList<Cita>();
 	
 	@ManyToOne(fetch = FetchType.LAZY)
-	Clinica clinica;
+	Medico medico;
 	
-	@OneToMany(fetch = FetchType.LAZY, mappedBy="sala")
-	List<Consulta> consultas = new ArrayList<Consulta>();
+	@ManyToOne(fetch = FetchType.LAZY)
+	Sala sala;
+	
 	
 }
