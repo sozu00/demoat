@@ -5,6 +5,7 @@ import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
@@ -12,6 +13,7 @@ import javax.persistence.OneToMany;
 public class Clinica {
 
 	@Id
+	@GeneratedValue
 	Integer id;
 	
 	@OneToMany(fetch = FetchType.LAZY, mappedBy="clinica")
