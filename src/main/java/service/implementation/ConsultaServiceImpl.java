@@ -1,4 +1,4 @@
-package service;
+package service.implementation;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -6,6 +6,8 @@ import org.springframework.stereotype.Service;
 import dao.ConsultaDAO;
 import model.Consulta;
 import model.Medico;
+import service.ConsultaService;
+import service.MedicoService;
 
 @Service
 public class ConsultaServiceImpl implements ConsultaService {

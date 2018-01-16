@@ -1,10 +1,11 @@
-package service;
+package service.implementation;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import dao.MedicoDAO;
 import model.Medico;
+import service.MedicoService;
 
 @Service
 public class MedicoServiceImpl implements MedicoService {
