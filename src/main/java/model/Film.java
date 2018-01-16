@@ -12,7 +12,7 @@ public class Film {
 	private
 	String id;
 	
-	private String title;
+	String title;
 	
 	@ManyToOne(fetch = FetchType.LAZY)
 	private User user;
