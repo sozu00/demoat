@@ -10,6 +10,8 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
+import lombok.Getter;
+
 @Entity
 public class Consulta {
 
@@ -20,9 +22,9 @@ public class Consulta {
 	@OneToMany(fetch = FetchType.LAZY,mappedBy="consulta")
 	List<Cita> citas = new ArrayList<Cita>();
 
-	
 	@ManyToOne(fetch = FetchType.LAZY)
-	Medico medico;
+	@Getter
+	private Medico medico;
 	
 	@ManyToOne(fetch = FetchType.LAZY)
 	Sala sala;
