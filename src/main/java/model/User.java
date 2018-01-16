@@ -10,9 +10,7 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.UniqueConstraint;
 
-@Entity //Esta clase es una entidad, una tabla de BD
-//@Table(name = "usuario") 
-//Para asignar el nombre de tabla en castellano
+@Entity
 public class User {
 	
 	@Id //ID de la tabla
