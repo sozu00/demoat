@@ -1,21 +1,9 @@
-logging:
-  level.org.springframework: INFO
-  level.com.dbg: DEBUG
 spring:
+  jpa:
+    database: MYSQL
+    hibernate:ddl-auto: create
   datasource:
-    url: jdbc:hsqldb:mem:dataSource
-    username: sa
-    password:
----
-spring:
-  profiles: local
-  datasource:
-    url: jdbc:mysql://localhost:3306/films
+    url: jdbc:mysql://localhost:3306/demoat
     username: root
     password: root
-  jpa:
-    show-sql: true
-    format-sql: true
-    hibernate:
-      ddl-auto: update
-      dialect: org.hibernate.dialect.MySQL5Dialect
+    driver-class-name: com.mysql.jdbc.Driver
