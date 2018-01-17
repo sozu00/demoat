@@ -7,7 +7,7 @@ import dao.SalaDAO;
 import model.Sala;
 import service.SalaService;
 
-@Service
+
 public class SalaServiceImpl implements SalaService {
 
 	@Autowired

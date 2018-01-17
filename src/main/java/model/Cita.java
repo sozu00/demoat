@@ -18,4 +18,7 @@ public class Cita {
 	
 	@ManyToOne(fetch = FetchType.LAZY)
 	Consulta consulta;
+	
+	@GeneratedValue( /*Generado o Estrategia*/)
+	Integer orden;
 }

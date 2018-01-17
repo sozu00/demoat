@@ -7,7 +7,7 @@ import dao.UserDao;
 import model.User;
 import service.UserService;
 
-@Service
+
 public class UserServiceImpl implements UserService {
 
 	@Autowired

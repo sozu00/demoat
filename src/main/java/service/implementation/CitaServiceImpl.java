@@ -7,7 +7,7 @@ import dao.CitaDAO;
 import model.Cita;
 import service.CitaService;
 
-@Service
+
 public class CitaServiceImpl implements CitaService {
 
 	@Autowired

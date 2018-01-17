@@ -7,7 +7,7 @@ import dao.ClinicaDAO;
 import model.Clinica;
 import service.ClinicaService;
 
-@Service
+
 public class ClinicaServiceImpl implements ClinicaService {
 
 	@Autowired

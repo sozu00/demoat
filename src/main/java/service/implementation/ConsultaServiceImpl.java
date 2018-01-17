@@ -9,7 +9,6 @@ import model.Medico;
 import service.ConsultaService;
 import service.MedicoService;
 
-@Service
 public class ConsultaServiceImpl implements ConsultaService {
 
 	@Autowired
@@ -25,6 +24,6 @@ public class ConsultaServiceImpl implements ConsultaService {
 	
 	@Override
 	public Medico findDoctorByConsultaId(Integer id) {
-		return dao.findOne(id).getMedico();
+		return null;
 	}
 }

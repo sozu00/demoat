@@ -14,8 +14,10 @@ public class Paciente {
 
 	@Id
 	@GeneratedValue
-	Integer id;
+	private Integer id;
+
+	private String name;
 	
 	@OneToMany(fetch = FetchType.LAZY, mappedBy="paciente")
-	List<Cita> citas = new ArrayList<Cita>();
+	private List<Cita> citas = new ArrayList<Cita>();
 }

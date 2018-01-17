@@ -14,8 +14,8 @@ public class Clinica {
 
 	@Id
 	@GeneratedValue
-	Integer id;
+	private Integer id;
 	
 	@OneToMany(fetch = FetchType.LAZY, mappedBy="clinica")
-	List<Sala>salas = new ArrayList<Sala>();
+	private List<Sala>salas = new ArrayList<Sala>();
 }

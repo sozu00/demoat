@@ -7,7 +7,7 @@ import dao.MedicoDAO;
 import model.Medico;
 import service.MedicoService;
 
-@Service
+
 public class MedicoServiceImpl implements MedicoService {
 
 	@Autowired

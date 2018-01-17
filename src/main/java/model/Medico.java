@@ -17,7 +17,6 @@ public class Medico {
 	@GeneratedValue
 	Integer id;
 	
-	@Column(unique=true)
 	String name;
 	
 	@Column(unique=true)
