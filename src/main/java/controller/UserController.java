@@ -37,7 +37,8 @@ public class UserController {
 	@RequestMapping(method = RequestMethod.GET, value = "/(idUser)")
 	public User findOneById(@PathVariable Integer idUser) {
 		log.info(String.format(LOG_INFO_GET_USER_ID, idUser));
-		return userService.findById(idUser);
+		final User findById = userService.findById(idUser);
+		return findById;
 	}
 	
 	@RequestMapping(method = RequestMethod.POST)

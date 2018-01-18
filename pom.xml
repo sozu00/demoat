@@ -49,12 +49,6 @@
 			<groupId>org.projectlombok</groupId>
 			<artifactId>lombok</artifactId>
 		</dependency>
-		<dependency> 
-			<groupId>net.sf.dozer</groupId> 
-			<artifactId>dozer-parent</artifactId> 
-			<version>5.4.0</version> 
-			<type>pom</type> 
-		</dependency>
 	</dependencies>
 
 	<build>
