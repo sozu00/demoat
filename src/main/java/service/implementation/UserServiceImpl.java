@@ -47,12 +47,11 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	public User map(UserDTO u) {
-		return new
+		return new DozerBeanMapper().map(u, User.class);
 	}
 
 	@Override
 	public UserDTO transform(User u) {
-		// TODO Auto-generated method stub
-		return null;
+		return new DozerBeanMapper().map(u, UserDTO.class);
 	}
 }
