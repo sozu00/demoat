@@ -1,5 +1,7 @@
 package service;
 
+import java.util.List;
+
 import org.springframework.stereotype.Service;
 
 import model.User;
@@ -13,6 +15,33 @@ public interface UserService {
 	 * @return
 	 */
 	User findById(Integer id);
+
+	/**
+	 * Busca todos los usuarios paginados
+	 * @param page
+	 * @param size
+	 * @return
+	 */
+	List<User> findAll(Integer page, Integer size);
+
+	/**
+	 * Crea el usuario u
+	 * @param u
+	 * @return
+	 */
+	User create(User u);
+
+	/**
+	 * Actualiza el usuario u
+	 * @param u
+	 */
+	void update(User u);
+
+	/**
+	 * Elimina al usuario con id=idUser
+	 * @param idUser
+	 */
+	void delete(Integer idUser);
 	
 //	@Query(value = "from User u where u.name like :name")
 //	public List<User> findByName(@Param("name") String paramName);
