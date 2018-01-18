@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 
+import DTO.UserDTO;
 import model.User;
 
 @Service
@@ -43,6 +44,14 @@ public interface UserService {
 	 */
 	void delete(Integer idUser);
 	
+	/**
+	 * Crea un user a partir de un DTO
+	 * @param u
+	 * @return
+	 */
+	User map(UserDTO u);
+	
+	UserDTO transform(User u);
 //	@Query(value = "from User u where u.name like :name")
 //	public List<User> findByName(@Param("name") String paramName);
 }
