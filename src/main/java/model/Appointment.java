@@ -7,17 +7,17 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 
 @Entity
-public class Cita {
+public class Appointment {
 
 	@Id
 	@GeneratedValue
 	Integer id;
 	
 	@ManyToOne(fetch = FetchType.LAZY)
-	Paciente paciente;
+	Pacient paciente;
 	
 	@ManyToOne(fetch = FetchType.LAZY)
-	Consulta consulta;
+	Consultation consulta;
 	
 	@GeneratedValue( /*Generado o Estrategia*/)
 	Integer orden;

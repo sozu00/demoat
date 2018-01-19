@@ -3,7 +3,6 @@ package model;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -11,17 +10,14 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
 @Entity
-public class Medico {
+public class Pacient {
 
 	@Id
 	@GeneratedValue
-	Integer id;
+	private Integer id;
+
+	private String name;
 	
-	String name;
-	
-	@Column(unique=true)
-	String email;
-	
-	@OneToMany(fetch = FetchType.LAZY, mappedBy="medico")
-	List<Consulta> consultas = new ArrayList<Consulta>();
+	@OneToMany(fetch = FetchType.LAZY, mappedBy="paciente")
+	private List<Appointment> citas = new ArrayList<Appointment>();
 }

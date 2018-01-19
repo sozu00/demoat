@@ -16,24 +16,24 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
 @Entity
-public class Consulta {
+public class Consultation {
 
 	@Id
 	@GeneratedValue
 	private Integer id;
 	
 	@OneToMany(fetch = FetchType.LAZY,mappedBy="consulta")
-	private List<Cita> citas = new ArrayList<Cita>();
+	private List<Appointment> citas = new ArrayList<Appointment>();
 
 	@ManyToOne(fetch = FetchType.LAZY)
-	private Medico medico;
+	private Doctor medico;
 	
 	@ManyToOne(fetch = FetchType.LAZY)
-	private Sala sala;
+	private Room sala;
 	
 	@Temporal(value = TemporalType.DATE)
 	private Date fecha;
 	
 	@Enumerated(EnumType.STRING)
-	private Turno turno;
+	private Turn turno;
 }

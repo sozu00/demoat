@@ -10,14 +10,12 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
 @Entity
-public class Paciente {
+public class Clinic {
 
 	@Id
 	@GeneratedValue
 	private Integer id;
-
-	private String name;
 	
-	@OneToMany(fetch = FetchType.LAZY, mappedBy="paciente")
-	private List<Cita> citas = new ArrayList<Cita>();
+	@OneToMany(fetch = FetchType.LAZY, mappedBy="clinica")
+	private List<Room>salas = new ArrayList<Room>();
 }

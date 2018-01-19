@@ -12,7 +12,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
 @Entity
-public class Sala {
+public class Room {
 
 	@Id
 	@GeneratedValue
@@ -22,9 +22,9 @@ public class Sala {
 	String roomNumber;
 	
 	@ManyToOne(fetch = FetchType.LAZY)
-	Clinica clinica;
+	Clinic clinica;
 	
 	@OneToMany(fetch = FetchType.LAZY, mappedBy="sala")
-	List<Consulta> consultas = new ArrayList<Consulta>();
+	List<Consultation> consultas = new ArrayList<Consultation>();
 	
 }

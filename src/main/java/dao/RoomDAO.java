@@ -2,8 +2,8 @@ package dao;
 
 import org.springframework.data.repository.PagingAndSortingRepository;
 
-import model.Sala;
+import model.Room;
 
-public interface SalaDAO extends PagingAndSortingRepository<Sala, Integer>{
+public interface RoomDAO extends PagingAndSortingRepository<Room, Integer>{
 
 }
