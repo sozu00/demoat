@@ -14,11 +14,11 @@ public class Appointment {
 	Integer id;
 	
 	@ManyToOne(fetch = FetchType.LAZY)
-	Pacient paciente;
+	Pacient pacient;
 	
 	@ManyToOne(fetch = FetchType.LAZY)
-	Consultation consulta;
+	Consultation consultation;
 	
 	@GeneratedValue( /*Generado o Estrategia*/)
-	Integer orden;
+	Integer position;
 }

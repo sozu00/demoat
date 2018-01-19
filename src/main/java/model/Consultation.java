@@ -22,18 +22,18 @@ public class Consultation {
 	@GeneratedValue
 	private Integer id;
 	
-	@OneToMany(fetch = FetchType.LAZY,mappedBy="consulta")
-	private List<Appointment> citas = new ArrayList<Appointment>();
+	@OneToMany(fetch = FetchType.LAZY,mappedBy="consultation")
+	private List<Appointment> appointments = new ArrayList<Appointment>();
 
 	@ManyToOne(fetch = FetchType.LAZY)
-	private Doctor medico;
+	private Doctor doctor;
 	
 	@ManyToOne(fetch = FetchType.LAZY)
-	private Room sala;
+	private Room room;
 	
 	@Temporal(value = TemporalType.DATE)
-	private Date fecha;
+	private Date day;
 	
 	@Enumerated(EnumType.STRING)
-	private Turn turno;
+	private Turn turn;
 }

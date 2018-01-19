@@ -1,14 +1,22 @@
 package service;
 
+import java.util.List;
+
 import org.springframework.stereotype.Service;
 
-import model.Room;
+import DTO.RoomDTO;
 
 @Service
 public interface RoomService {
 
-	Room findById(Integer id);
+	RoomDTO findById(Integer id);
+
+	List<RoomDTO> findAll(Integer page, Integer size);
+
+	RoomDTO create(RoomDTO room);
+
+	void update(RoomDTO room);
+
+	void delete(Integer id);
 	
-//	@Query(value = "from User u where u.name like :name")
-//	public List<User> findByName(@Param("name") String paramName);
 }

@@ -1,21 +1,24 @@
-package model;
+package DTO;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
-@Entity
-public class Clinic {
+public class RoomDTO {
 
-	@Id
-	@GeneratedValue
-	private Integer id;
+	Integer id;
 	
-	@OneToMany(fetch = FetchType.LAZY, mappedBy="clinic")
-	private List<Room>rooms = new ArrayList<Room>();
+	String roomNumber;
+	
+	String clinicId;
+	
+	List<String> consultations = new ArrayList<>();
+	
 }

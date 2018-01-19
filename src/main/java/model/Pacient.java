@@ -18,6 +18,6 @@ public class Pacient {
 
 	private String name;
 	
-	@OneToMany(fetch = FetchType.LAZY, mappedBy="paciente")
-	private List<Appointment> citas = new ArrayList<Appointment>();
+	@OneToMany(fetch = FetchType.LAZY, mappedBy="pacient")
+	private List<Appointment> appointments = new ArrayList<Appointment>();
 }

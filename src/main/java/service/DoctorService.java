@@ -1,14 +1,22 @@
 package service;
 
+import java.util.List;
+
 import org.springframework.stereotype.Service;
 
-import model.Doctor;
+import DTO.DoctorDTO;
 
 @Service
 public interface DoctorService {
 
-	Doctor findById(Integer id);
+	DoctorDTO findById(Integer id);
+
+	List<DoctorDTO> findAll(Integer page, Integer size);
+
+	DoctorDTO create(DoctorDTO doctor);
+
+	void update(DoctorDTO doctor);
+
+	void delete(Integer id);
 	
-//	@Query(value = "from User u where u.name like :name")
-//	public List<User> findByName(@Param("name") String paramName);
 }

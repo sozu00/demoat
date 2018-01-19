@@ -22,9 +22,9 @@ public class Room {
 	String roomNumber;
 	
 	@ManyToOne(fetch = FetchType.LAZY)
-	Clinic clinica;
+	Clinic clinic;
 	
-	@OneToMany(fetch = FetchType.LAZY, mappedBy="sala")
-	List<Consultation> consultas = new ArrayList<Consultation>();
+	@OneToMany(fetch = FetchType.LAZY, mappedBy="room")
+	List<Consultation> consultations = new ArrayList<Consultation>();
 	
 }

@@ -22,6 +22,6 @@ public class Doctor {
 	@Column(unique=true)
 	String email;
 	
-	@OneToMany(fetch = FetchType.LAZY, mappedBy="medico")
-	List<Consultation> consultas = new ArrayList<Consultation>();
+	@OneToMany(fetch = FetchType.LAZY, mappedBy="doctor")
+	List<Consultation> consultations = new ArrayList<Consultation>();
 }
