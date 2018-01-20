@@ -18,5 +18,5 @@ public interface DoctorService {
 	void update(DoctorDTO doctor);
 
 	void delete(Integer id);
-	
+
 }

@@ -1,4 +1,4 @@
-package DTO;
+package model;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -9,11 +9,15 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
-public class PacientDTO {
+@Entity
+public class Patient {
 
+	@Id
+	@GeneratedValue
 	private Integer id;
 
 	private String name;
 	
-	private List<String> appointments = new ArrayList<>();
+	@OneToMany(fetch = FetchType.LAZY, mappedBy="patient")
+	private List<Appointment> appointments = new ArrayList<Appointment>();
 }

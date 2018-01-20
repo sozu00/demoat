@@ -14,7 +14,7 @@ public class Appointment {
 	Integer id;
 	
 	@ManyToOne(fetch = FetchType.LAZY)
-	Pacient pacient;
+	Patient patient;
 	
 	@ManyToOne(fetch = FetchType.LAZY)
 	Consultation consultation;

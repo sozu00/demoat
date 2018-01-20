@@ -7,7 +7,7 @@ public class AppointmentDTO {
 
 	private Integer id;
 	
-	private Integer pacientId;
+	private Integer patientId;
 	
 	private Integer consultationId;
 	

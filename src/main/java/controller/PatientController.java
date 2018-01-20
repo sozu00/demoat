@@ -10,41 +10,41 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import DTO.PacientDTO;
-import service.PacientService;
+import DTO.PatientDTO;
+import service.PatientService;
 
 @RestController
 @RequestMapping(value = "api/user")
-public class PacientController {
+public class PatientController {
 	
 	@Autowired
-	private PacientService pacientService;
+	private PatientService patientService;
 	
-	public List<PacientDTO> findAll(@RequestParam(required=false) Integer page,
+	public List<PatientDTO> findAll(@RequestParam(required=false) Integer page,
 			@RequestParam(required = false) Integer size){
-		return pacientService.findAll(page, size);
+		return patientService.findAll(page, size);
 	}
 	
 	@RequestMapping(value = "/{id}", method = { RequestMethod.PUT })
-	public PacientDTO findOneById(@PathVariable Integer id) {
-		return pacientService.findById(id);
+	public PatientDTO findOneById(@PathVariable Integer id) {
+		return patientService.findById(id);
 	}
 	
 	@RequestMapping(method = {RequestMethod.POST})
-	public PacientDTO create(@RequestBody PacientDTO pacient) {
-		return pacientService.create(pacient);
+	public PatientDTO create(@RequestBody PatientDTO patient) {
+		return patientService.create(patient);
 	}
 	
 	@RequestMapping(value = "/{id}",method = {RequestMethod.PUT})
-	public void update(@RequestBody PacientDTO pacient, 
+	public void update(@RequestBody PatientDTO patient, 
 			@PathVariable("id") Integer id) {
-		pacientService.update(pacient);
+		patientService.update(patient);
 	}
 	
 	@RequestMapping(value = "/{id}",method = {RequestMethod.PUT})
-	public void delete(@RequestBody PacientDTO pacient, 
+	public void delete(@RequestBody PatientDTO patient, 
 			@PathVariable("id") Integer id) {
-		pacientService.delete(id);
+		patientService.delete(id);
 	}
 }
 

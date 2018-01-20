@@ -4,20 +4,19 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import javax.persistence.Entity;
-
+import lombok.Data;
 import model.Turn;
 
-@Entity
+@Data
 public class ConsultationDTO {
 
 	private Integer id;
 	
 	private List<String> appointments = new ArrayList<>();
 
-	private String doctor;
+	private Integer doctor;
 	
-	private String room;
+	private Integer room;
 	
 	private Date day;
 	
