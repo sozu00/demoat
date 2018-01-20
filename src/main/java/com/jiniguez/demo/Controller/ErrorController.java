@@ -17,7 +17,7 @@ public class ErrorController {
 	@ExceptionHandler(NotFoundException.class)
 	@ResponseStatus(HttpStatus.NOT_FOUND)
 	public ErrorDTO error(NotFoundException e) {
-		return new ErrorDTO(404, "PAPARRUCHAS");
+		return new ErrorDTO(404, e.getMessage());
 	}
 	
 	@ResponseBody
