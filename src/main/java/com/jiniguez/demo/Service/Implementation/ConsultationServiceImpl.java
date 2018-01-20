@@ -2,6 +2,7 @@ package com.jiniguez.demo.Service.Implementation;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import org.dozer.DozerBeanMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,6 +11,8 @@ import org.springframework.stereotype.Service;
 import com.jiniguez.demo.DAO.ConsultationDAO;
 import com.jiniguez.demo.DTO.ConsultationDTO;
 import com.jiniguez.demo.DTO.DoctorDTO;
+import com.jiniguez.demo.Exceptions.NotFoundException;
+import com.jiniguez.demo.Model.Appointment;
 import com.jiniguez.demo.Model.Consultation;
 import com.jiniguez.demo.Service.ConsultationService;
 import com.jiniguez.demo.Service.DoctorService;
@@ -35,8 +38,9 @@ public class ConsultationServiceImpl implements ConsultationService {
 	}
 	
 	@Override
-	public ConsultationDTO findById(Integer id) {
-		final Consultation a = consultationDAO.findOne(id);
+	public ConsultationDTO findById(Integer id) throws NotFoundException {
+		Consultation a = Optional.ofNullable(consultationDAO.findOne(id))
+        		.orElseThrow(() -> new NotFoundException());
 		return consultationToDTO(a);
 	}
 
@@ -69,7 +73,7 @@ public class ConsultationServiceImpl implements ConsultationService {
 	}
 
 	@Override
-	public DoctorDTO findDoctorByConsultaId(Integer id) {
+	public DoctorDTO findDoctorByConsultaId(Integer id) throws NotFoundException {
 		ConsultationDTO aDTO = consultationToDTO(consultationDAO.findOne(id));
 		return doctorService.findById(aDTO.getDoctor());
 	}

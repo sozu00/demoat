@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.jiniguez.demo.DTO.ClinicDTO;
+import com.jiniguez.demo.Exceptions.NotFoundException;
 import com.jiniguez.demo.Service.ClinicService;
 
 @RestController
@@ -27,7 +28,7 @@ public class ClinicController {
 	}
 	
 	@RequestMapping(value = "/{id}", method = { RequestMethod.GET })
-	public ClinicDTO findOneById(@PathVariable Integer id) {
+	public ClinicDTO findOneById(@PathVariable Integer id) throws NotFoundException {
 		return clinicService.findById(id);
 	}
 	

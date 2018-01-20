@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.jiniguez.demo.DTO.DoctorDTO;
+import com.jiniguez.demo.Exceptions.NotFoundException;
 import com.jiniguez.demo.Service.DoctorService;
 
 @RestController
@@ -27,13 +28,18 @@ public class DoctorController {
 	}
 	
 	@RequestMapping(value = "/{id}", method = { RequestMethod.GET })
-	public DoctorDTO findOneById(@PathVariable Integer id) {
+	public DoctorDTO findOneById(@PathVariable Integer id) throws NotFoundException{
 		return doctorService.findById(id);
 	}
 	
 	@RequestMapping(value = "/name={name}", method = { RequestMethod.GET })
 	public List<DoctorDTO> findByName(@PathVariable String name) {
 		return doctorService.findByName(name);
+	}
+	
+	@RequestMapping(value = "/top={num}", method = { RequestMethod.GET })
+	public List<DoctorDTO> findTopNDoctorsWithMorePatients(@PathVariable Integer num) {
+		return doctorService.findTopNDoctorsWithMorePatients(num);
 	}
 	
 	@RequestMapping(method = {RequestMethod.POST})

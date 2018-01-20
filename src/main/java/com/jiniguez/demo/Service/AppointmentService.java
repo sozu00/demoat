@@ -3,6 +3,7 @@ package com.jiniguez.demo.Service;
 import java.util.List;
 
 import com.jiniguez.demo.DTO.AppointmentDTO;
+import com.jiniguez.demo.Exceptions.NotFoundException;
 
 
 public interface AppointmentService {
@@ -11,8 +12,9 @@ public interface AppointmentService {
 	 * Encuentra una cita a partir de su id
 	 * @param id
 	 * @return Objeto cita
+	 * @throws NotFoundException 
 	 */
-	AppointmentDTO findById(Integer id);
+	AppointmentDTO findById(Integer id) throws NotFoundException;
 
 	/**
 	 * Encuentra todas las cita paginables
