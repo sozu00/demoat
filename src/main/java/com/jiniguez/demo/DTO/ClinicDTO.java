@@ -9,5 +9,5 @@ public class ClinicDTO {
 
 	private Integer id;
 	
-	private List<Integer> rooms;
+//	private List<Integer> rooms;
 }

@@ -12,5 +12,5 @@ public class PatientDTO {
 
 	private String name;
 	
-	private List<String> appointments = new ArrayList<>();
+//	private List<Integer> appointments = new ArrayList<>();
 }

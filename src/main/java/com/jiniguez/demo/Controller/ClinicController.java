@@ -20,12 +20,13 @@ public class ClinicController {
 	@Autowired
 	private ClinicService clinicService;
 	
+	@RequestMapping(method = { RequestMethod.GET })
 	public List<ClinicDTO> findAll(@RequestParam(required=false) Integer page,
 			@RequestParam(required = false) Integer size){
 		return clinicService.findAll(page, size);
 	}
 	
-	@RequestMapping(value = "/{id}", method = { RequestMethod.PUT })
+	@RequestMapping(value = "/{id}", method = { RequestMethod.GET })
 	public ClinicDTO findOneById(@PathVariable Integer id) {
 		return clinicService.findById(id);
 	}
@@ -41,7 +42,7 @@ public class ClinicController {
 		clinicService.update(clinic);
 	}
 	
-	@RequestMapping(value = "/{id}",method = {RequestMethod.PUT})
+	@RequestMapping(value = "/{id}",method = {RequestMethod.DELETE})
 	public void delete(@RequestBody ClinicDTO clinic, 
 			@PathVariable("id") Integer id) {
 		clinicService.delete(id);

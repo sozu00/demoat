@@ -5,13 +5,14 @@ import java.util.List;
 
 import org.dozer.DozerBeanMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import com.jiniguez.demo.DAO.DoctorDAO;
 import com.jiniguez.demo.DTO.DoctorDTO;
 import com.jiniguez.demo.Model.Doctor;
 import com.jiniguez.demo.Service.DoctorService;
 
-
+@Service
 public class DoctorServiceImpl implements DoctorService {
 
 	@Autowired
@@ -60,6 +61,18 @@ public class DoctorServiceImpl implements DoctorService {
 	@Override
 	public void delete(Integer id) {
 		doctorDAO.delete(id);
+	}
+
+	@Override
+	public List<DoctorDTO> findByName(String name) {
+		final Iterable<Doctor> findAll = doctorDAO.findAll();
+		final List<DoctorDTO> res = new ArrayList<>();
+		findAll.forEach(b ->{
+			final DoctorDTO aDTO = doctorToDTO(b);
+			if(b.getName().equals(name))
+				res.add(aDTO);
+			});
+		return res;
 	}
 
 }

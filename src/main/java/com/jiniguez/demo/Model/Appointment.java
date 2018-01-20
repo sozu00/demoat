@@ -6,19 +6,23 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 
+import lombok.Data;
+
 @Entity
+@Data
 public class Appointment {
 
 	@Id
 	@GeneratedValue
-	Integer id;
+	private Integer id;
+	
+	@GeneratedValue
+	private Integer position;
 	
 	@ManyToOne(fetch = FetchType.LAZY)
-	Patient patient;
+	private Patient patient;
 	
 	@ManyToOne(fetch = FetchType.LAZY)
-	Consultation consultation;
+	private Consultation consultation;
 	
-	@GeneratedValue( /*Generado o Estrategia*/)
-	Integer position;
 }

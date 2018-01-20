@@ -5,13 +5,14 @@ import java.util.List;
 
 import org.dozer.DozerBeanMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import com.jiniguez.demo.DAO.PatientDAO;
 import com.jiniguez.demo.DTO.PatientDTO;
 import com.jiniguez.demo.Model.Patient;
 import com.jiniguez.demo.Service.PatientService;
 
-
+@Service
 public class PatientServiceImpl implements PatientService {
 
 	@Autowired

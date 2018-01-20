@@ -5,13 +5,14 @@ import java.util.List;
 
 import org.dozer.DozerBeanMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import com.jiniguez.demo.DAO.RoomDAO;
 import com.jiniguez.demo.DTO.RoomDTO;
 import com.jiniguez.demo.Model.Room;
 import com.jiniguez.demo.Service.RoomService;
 
-
+@Service
 public class RoomServiceImpl implements RoomService {
 
 	@Autowired

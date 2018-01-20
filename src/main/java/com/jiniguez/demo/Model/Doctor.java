@@ -10,18 +10,21 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
+import lombok.Data;
+
 @Entity
+@Data
 public class Doctor {
 
 	@Id
 	@GeneratedValue
-	Integer id;
+	private Integer id;
 	
-	String name;
+	private String name;
 	
-	@Column(unique=true)
-	String email;
+//	@Column(unique=true)
+	private String email;
 	
 	@OneToMany(fetch = FetchType.LAZY, mappedBy="doctor")
-	List<Consultation> consultations = new ArrayList<Consultation>();
+	private List<Consultation> consultations = new ArrayList<Consultation>();
 }

@@ -13,13 +13,13 @@ public class ConsultationDTO {
 
 	private Integer id;
 	
-	private List<Integer> appointments = new ArrayList<>();
+//	private List<Integer> appointments = new ArrayList<>();
 
 	private Integer doctor;
 	
 	private Integer room;
 	
-	private Date day;
+//	private Date day;
 	
-	private Turn turn;
+//	private Turn turn;
 }

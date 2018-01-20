@@ -1,11 +1,9 @@
-package com.jiniguez.demo.Model;
+package model;
 
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
-
-import model.User;
 
 @Entity
 public class Film {

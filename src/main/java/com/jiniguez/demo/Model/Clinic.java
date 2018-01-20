@@ -9,7 +9,10 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
+import lombok.Data;
+
 @Entity
+@Data
 public class Clinic {
 
 	@Id

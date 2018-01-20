@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.dozer.DozerBeanMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import com.jiniguez.demo.DAO.ConsultationDAO;
 import com.jiniguez.demo.DTO.ConsultationDTO;
@@ -13,7 +14,7 @@ import com.jiniguez.demo.Model.Consultation;
 import com.jiniguez.demo.Service.ConsultationService;
 import com.jiniguez.demo.Service.DoctorService;
 
-
+@Service
 public class ConsultationServiceImpl implements ConsultationService {
 
 	@Autowired

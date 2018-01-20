@@ -11,20 +11,24 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
+import lombok.Data;
+
+
 @Entity
+@Data
 public class Room {
 
 	@Id
 	@GeneratedValue
-	Integer id;
+	private Integer id;
 	
 	@Column(unique = true)
-	String roomNumber;
+	private Integer roomNumber;
 	
 	@ManyToOne(fetch = FetchType.LAZY)
-	Clinic clinic;
+	private Clinic clinic;
 	
 	@OneToMany(fetch = FetchType.LAZY, mappedBy="room")
-	List<Consultation> consultations = new ArrayList<Consultation>();
+	private List<Consultation> consultations = new ArrayList<Consultation>();
 	
 }

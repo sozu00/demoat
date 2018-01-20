@@ -5,13 +5,14 @@ import java.util.List;
 
 import org.dozer.DozerBeanMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import com.jiniguez.demo.DAO.AppointmentDAO;
 import com.jiniguez.demo.DTO.AppointmentDTO;
 import com.jiniguez.demo.Model.Appointment;
 import com.jiniguez.demo.Service.AppointmentService;
 
-
+@Service
 public class AppointmentServiceImpl implements AppointmentService {
 
 	@Autowired

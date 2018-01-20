@@ -20,12 +20,13 @@ public class ConsultationController {
 	@Autowired
 	private ConsultationService consultationService;
 	
+	@RequestMapping(method = { RequestMethod.GET })
 	public List<ConsultationDTO> findAll(@RequestParam(required=false) Integer page,
 			@RequestParam(required = false) Integer size){
 		return consultationService.findAll(page, size);
 	}
 	
-	@RequestMapping(value = "/{id}", method = { RequestMethod.PUT })
+	@RequestMapping(value = "/{id}", method = { RequestMethod.GET })
 	public ConsultationDTO findOneById(@PathVariable Integer id) {
 		return consultationService.findById(id);
 	}
@@ -41,7 +42,7 @@ public class ConsultationController {
 		consultationService.update(consultation);
 	}
 	
-	@RequestMapping(value = "/{id}",method = {RequestMethod.PUT})
+	@RequestMapping(value = "/{id}",method = {RequestMethod.DELETE})
 	public void delete(@RequestBody ConsultationDTO consultation, 
 			@PathVariable("id") Integer id) {
 		consultationService.delete(id);

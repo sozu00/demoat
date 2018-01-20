@@ -1,12 +1,8 @@
 package com.jiniguez.demo.Service;
 
 import java.util.List;
-
-import org.springframework.stereotype.Service;
-
 import com.jiniguez.demo.DTO.DoctorDTO;
 
-@Service
 public interface DoctorService {
 
 	DoctorDTO findById(Integer id);
@@ -18,5 +14,7 @@ public interface DoctorService {
 	void update(DoctorDTO doctor);
 
 	void delete(Integer id);
+
+	List<DoctorDTO> findByName(String name);
 
 }

@@ -9,8 +9,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
-import com.jiniguez.demo.Model.Film;
-
 import lombok.Getter;
 import lombok.Setter;
 

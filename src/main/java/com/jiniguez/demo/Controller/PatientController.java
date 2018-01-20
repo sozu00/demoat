@@ -20,12 +20,13 @@ public class PatientController {
 	@Autowired
 	private PatientService patientService;
 	
+	@RequestMapping(method = { RequestMethod.GET })
 	public List<PatientDTO> findAll(@RequestParam(required=false) Integer page,
 			@RequestParam(required = false) Integer size){
 		return patientService.findAll(page, size);
 	}
 	
-	@RequestMapping(value = "/{id}", method = { RequestMethod.PUT })
+	@RequestMapping(value = "/{id}", method = { RequestMethod.GET })
 	public PatientDTO findOneById(@PathVariable Integer id) {
 		return patientService.findById(id);
 	}
@@ -41,7 +42,7 @@ public class PatientController {
 		patientService.update(patient);
 	}
 	
-	@RequestMapping(value = "/{id}",method = {RequestMethod.PUT})
+	@RequestMapping(value = "/{id}",method = {RequestMethod.DELETE})
 	public void delete(@RequestBody PatientDTO patient, 
 			@PathVariable("id") Integer id) {
 		patientService.delete(id);

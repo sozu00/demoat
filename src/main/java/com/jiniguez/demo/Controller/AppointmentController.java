@@ -20,12 +20,13 @@ public class AppointmentController {
 	@Autowired
 	private AppointmentService appointmentService;
 	
+	@RequestMapping(method = { RequestMethod.GET })
 	public List<AppointmentDTO> findAll(@RequestParam(required=false) Integer page,
 			@RequestParam(required = false) Integer size){
 		return appointmentService.findAll(page, size);
 	}
 	
-	@RequestMapping(value = "/{id}", method = { RequestMethod.PUT })
+	@RequestMapping(value = "/{id}", method = { RequestMethod.GET })
 	public AppointmentDTO findOneById(@PathVariable Integer id) {
 		return appointmentService.findById(id);
 	}
@@ -41,7 +42,7 @@ public class AppointmentController {
 		appointmentService.update(appointment);
 	}
 	
-	@RequestMapping(value = "/{id}",method = {RequestMethod.PUT})
+	@RequestMapping(value = "/{id}",method = {RequestMethod.DELETE})
 	public void delete(@RequestBody AppointmentDTO appointment, 
 			@PathVariable("id") Integer id) {
 		appointmentService.delete(id);

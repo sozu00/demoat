@@ -20,12 +20,13 @@ public class RoomController {
 	@Autowired
 	private RoomService roomService;
 	
+	@RequestMapping(method = { RequestMethod.GET })
 	public List<RoomDTO> findAll(@RequestParam(required=false) Integer page,
 			@RequestParam(required = false) Integer size){
 		return roomService.findAll(page, size);
 	}
 	
-	@RequestMapping(value = "/{id}", method = { RequestMethod.PUT })
+	@RequestMapping(value = "/{id}", method = { RequestMethod.GET })
 	public RoomDTO findOneById(@PathVariable Integer id) {
 		return roomService.findById(id);
 	}
@@ -41,7 +42,7 @@ public class RoomController {
 		roomService.update(room);
 	}
 	
-	@RequestMapping(value = "/{id}",method = {RequestMethod.PUT})
+	@RequestMapping(value = "/{id}",method = {RequestMethod.DELETE})
 	public void delete(@RequestBody RoomDTO room, 
 			@PathVariable("id") Integer id) {
 		roomService.delete(id);

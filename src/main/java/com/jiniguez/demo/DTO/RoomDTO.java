@@ -12,8 +12,8 @@ public class RoomDTO {
 	
 	private Integer roomNumber;
 	
-	private Integer clinicId;
+//	private Integer clinic;
 	
-	private List<Integer> consultations = new ArrayList<>();
+//	private List<Integer> consultations = new ArrayList<>();
 	
 }
