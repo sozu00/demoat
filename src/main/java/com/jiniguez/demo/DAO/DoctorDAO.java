@@ -13,11 +13,11 @@ import com.jiniguez.demo.Model.Doctor;
 @Repository
 public interface DoctorDAO extends CrudRepository<Doctor, Integer>{
 
-	@Query(value = "select new com.jiniguez.demo.DTO.DoctorDTO(d.id, d.name, d.email) from Doctor d  "
-			+ " join d.consultations c "
-			+ " join c.appointments a"
-			+ " order by count(distinct a.patient) "
-			+ " group by d.id")
+	@Query(value = "select new com.jiniguez.demo.DTO.DoctorDTO(d.id, d.name, d.email) from Doctor d  ")
+//			+ " join d.consultations c "
+//			+ " join c.appointments a"
+//			+ " order by count(distinct a.patient) "
+//			+ " group by d.id")
 	List<DoctorDTO> findTopNDoctorsWithMorePatients(@Param(value = "n")Integer n);
 //	value = "select doctor_id, count(distinct patient_id) "
 //	+ "from appointment, consultation "
