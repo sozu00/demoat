@@ -5,7 +5,6 @@ import java.util.List;
 import java.util.Optional;
 
 import org.dozer.DozerBeanMapper;
-import org.dozer.loader.api.BeanMappingBuilder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
