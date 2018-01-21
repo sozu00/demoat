@@ -6,4 +6,5 @@ import com.jiniguez.demo.Model.Appointment;
 
 public interface AppointmentDAO extends PagingAndSortingRepository<Appointment, Integer>{
 
+
 }

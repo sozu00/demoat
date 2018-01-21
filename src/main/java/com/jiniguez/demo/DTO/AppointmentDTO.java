@@ -21,8 +21,8 @@ public class AppointmentDTO implements Serializable {
 
 	private Integer position;
 	
-	private String patient;
+	private Integer patient_id;
 	
-	private String consultation;
+	private Integer consultation_id;
 
 }

@@ -26,6 +26,6 @@ public class DoctorDTO implements Serializable{
 	
 	private String email;
 	
-	private List<String> consultations = new ArrayList<>();
+	private List<Integer> consultations = new ArrayList<>();
 	
 }

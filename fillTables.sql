@@ -60,7 +60,7 @@ CREATE PROCEDURE createConsultations()
 BEGIN
     DECLARE i int DEFAULT 1;
     WHILE i <= 10 DO
-        INSERT INTO consultation(id, doctor_id, room_id) VALUES (i, i,i);
+        INSERT INTO consultation(id, day, turn, doctor_id, room_id) VALUES (i, curdate(),"M", i,i);
         SET i = i + 1;
     END WHILE;
 END$$
@@ -71,7 +71,7 @@ CREATE PROCEDURE createAppointment()
 BEGIN
     DECLARE i int DEFAULT 1;
     WHILE i <= 10 DO
-        INSERT INTO appointment(id, position, consultation_id, patient_id) VALUES (i,i,i,i);
+        INSERT INTO appointment(id, position, consultation_id, patient_id) VALUES (i, i,i,i);
         SET i = i + 1;
     END WHILE;
 END$$

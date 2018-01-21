@@ -74,6 +74,6 @@ public class ConsultationServiceImpl implements ConsultationService {
 	@Override
 	public DoctorDTO findDoctorByConsultaId(Integer id) throws NotFoundException {
 		ConsultationDTO aDTO = consultationToDTO(consultationDAO.findOne(id));
-		return doctorService.findById(Integer.valueOf(aDTO.getDoctor()));
+		return doctorService.findById(aDTO.getDoctor_id());
 	}
 }

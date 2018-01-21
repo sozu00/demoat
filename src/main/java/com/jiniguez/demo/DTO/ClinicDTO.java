@@ -19,6 +19,6 @@ public class ClinicDTO implements Serializable{
 	
 	private Integer id;
 	
-	private List<String> rooms;
+	private List<Integer> rooms;
 	
 }

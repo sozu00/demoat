@@ -16,7 +16,7 @@ public class ConsultationDTO implements Serializable{
 
 	private static final long serialVersionUID = 5058749307517290114L;
 
-	public ConsultationDTO(Integer id, Date day, Turn turn) {
+	public ConsultationDTO(Integer id, String day, Turn turn) {
 		super();
 		this.id=id;
 		this.day = day;
@@ -24,13 +24,13 @@ public class ConsultationDTO implements Serializable{
 	}
 	private Integer id;
 	
-	private List<String> appointments = new ArrayList<>();
+	private List<Integer> appointments = new ArrayList<>();
 
-	private String doctor;
+	private Integer doctor_id;
 	
-	private String room;
+	private Integer room_id;
 	
-	private Date day;
+	private String day;
 	
 	private Turn turn;
 	

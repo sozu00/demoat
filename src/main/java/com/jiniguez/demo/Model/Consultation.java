@@ -1,25 +1,32 @@
 package com.jiniguez.demo.Model;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import javax.persistence.Embeddable;
+import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.IdClass;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
+import org.dozer.Mapping;
+
 import lombok.Data;
 
 @Entity
 @Data
-public class Consultation {
+public class Consultation implements Serializable {
+	private static final long serialVersionUID = 8466851773235467553L;
 
 	@Id
 	@GeneratedValue
@@ -28,9 +35,11 @@ public class Consultation {
 	@OneToMany(fetch = FetchType.LAZY,mappedBy="consultation")
 	private List<Appointment> appointments = new ArrayList<Appointment>();
 
+	@Mapping("doctor_id")
 	@ManyToOne(fetch = FetchType.LAZY)
 	private Doctor doctor;
 	
+	@Mapping("room_id")
 	@ManyToOne(fetch = FetchType.LAZY)
 	private Room room;
 	
@@ -41,6 +50,7 @@ public class Consultation {
 	private Turn turn;
 	
 	public String toString(){
-		return String.format("Consultation [id=%d]", id);
+//		return String.format("Consultation [id=%d]", id);
+		return id.toString();
 	}
 }

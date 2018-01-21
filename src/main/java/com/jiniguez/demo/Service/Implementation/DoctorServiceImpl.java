@@ -3,6 +3,7 @@ package com.jiniguez.demo.Service.Implementation;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 import org.dozer.DozerBeanMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -80,7 +81,8 @@ public class DoctorServiceImpl implements DoctorService {
 
 	@Override
 	public List<DoctorDTO> findTopNDoctorsWithMorePatients(Integer num) {
-		return doctorDAO.findTopNDoctorsWithMorePatients(num);
+		List<DoctorDTO> list = doctorDAO.findTopNDoctorsWithMorePatients();
+		return list.stream().limit(num).collect(Collectors.toList());
 	}
 
 }
