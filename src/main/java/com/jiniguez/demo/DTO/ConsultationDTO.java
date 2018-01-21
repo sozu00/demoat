@@ -6,20 +6,34 @@ import java.util.List;
 
 import com.jiniguez.demo.Model.Turn;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.NoArgsConstructor;
 
 @Data
-public class ConsultationDTO {
+@NoArgsConstructor
+@EqualsAndHashCode(callSuper = false)
+public class ConsultationDTO extends DTO{
 
+	private static final long serialVersionUID = 5058749307517290114L;
+
+	public ConsultationDTO(Integer id, Date day, Turn turn) {
+		super();
+		this.id=id;
+		this.day = day;
+		this.turn = turn;
+	}
 	private Integer id;
 	
-//	private List<Integer> appointments = new ArrayList<>();
+	private List<String> appointments = new ArrayList<>();
 
-	private Integer doctor;
+	private String doctor;
 	
-	private Integer room;
+	private String room;
 	
-//	private Date day;
+	private Date day;
 	
-//	private Turn turn;
+	private Turn turn;
+	
 }

@@ -27,4 +27,8 @@ public class Doctor {
 	
 	@OneToMany(fetch = FetchType.LAZY, mappedBy="doctor")
 	private List<Consultation> consultations = new ArrayList<Consultation>();
+	
+	public String toString(){
+		return String.format("Doctor [id=%d, name=%s, email=%s]",id, name, email);
+	}
 }

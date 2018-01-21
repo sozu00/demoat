@@ -25,4 +25,7 @@ public class Appointment {
 	@ManyToOne(fetch = FetchType.LAZY)
 	private Consultation consultation;
 	
+	public String toString() {
+		return String.format("Appointment [id=%d, position=%d]",id, position);
+	}
 }

@@ -39,4 +39,8 @@ public class Consultation {
 	
 	@Enumerated(EnumType.STRING)
 	private Turn turn;
+	
+	public String toString(){
+		return String.format("Consultation [id=%d]", id);
+	}
 }
