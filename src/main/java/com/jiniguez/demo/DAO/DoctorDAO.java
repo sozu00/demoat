@@ -19,5 +19,12 @@ public interface DoctorDAO extends CrudRepository<Doctor, Integer>{
 			+ " group by d.id"
 			+ " order by count(distinct a.patient) desc")
 	List<DoctorDTO> findTopNDoctorsWithMorePatients();
-//	value = "select doctor_id, count(distinct patient_id) from appointment, consultation where consultation_id = consultation.id group by doctor_id"
+/*	QUERY
+ 	select d.id, count(distinct patient_id) 
+  	from doctor d, appointment a, consultation c 
+  	where d.id = c.doctor_id
+  	and a.consultation_id = c.id 
+  	group by d.id
+  	order by count(distinct a.patient_id) DESC
+ */
 }
