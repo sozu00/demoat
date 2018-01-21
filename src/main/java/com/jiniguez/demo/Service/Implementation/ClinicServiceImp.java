@@ -11,7 +11,6 @@ import org.springframework.stereotype.Service;
 import com.jiniguez.demo.DAO.ClinicDAO;
 import com.jiniguez.demo.DTO.ClinicDTO;
 import com.jiniguez.demo.Exceptions.NotFoundException;
-import com.jiniguez.demo.Model.Appointment;
 import com.jiniguez.demo.Model.Clinic;
 import com.jiniguez.demo.Service.ClinicService;
 

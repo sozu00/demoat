@@ -12,7 +12,6 @@ import com.jiniguez.demo.DAO.ConsultationDAO;
 import com.jiniguez.demo.DTO.ConsultationDTO;
 import com.jiniguez.demo.DTO.DoctorDTO;
 import com.jiniguez.demo.Exceptions.NotFoundException;
-import com.jiniguez.demo.Model.Appointment;
 import com.jiniguez.demo.Model.Consultation;
 import com.jiniguez.demo.Service.ConsultationService;
 import com.jiniguez.demo.Service.DoctorService;

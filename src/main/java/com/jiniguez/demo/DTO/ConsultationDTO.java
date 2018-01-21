@@ -1,20 +1,18 @@
 package com.jiniguez.demo.DTO;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
 import com.jiniguez.demo.Model.Turn;
 
-import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
 @Data
 @NoArgsConstructor
-@EqualsAndHashCode(callSuper = false)
-public class ConsultationDTO extends DTO{
+public class ConsultationDTO implements Serializable{
 
 	private static final long serialVersionUID = 5058749307517290114L;
 

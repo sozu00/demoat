@@ -1,19 +1,15 @@
 package com.jiniguez.demo.DTO;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Data;
-import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
-import lombok.NonNull;
 
 @Data
 @NoArgsConstructor
-@EqualsAndHashCode(callSuper = false)
-public class DoctorDTO extends DTO{
+public class DoctorDTO implements Serializable{
 	
 	private static final long serialVersionUID = 7315412479801388757L;
 
