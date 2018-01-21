@@ -9,6 +9,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
+import javax.persistence.Table;
+import javax.persistence.UniqueConstraint;
 
 import org.dozer.Mapping;
 
@@ -17,6 +19,7 @@ import lombok.Data;
 @Entity
 @Data
 @SequenceGenerator(name="seq", initialValue=1, allocationSize=100)
+@Table(uniqueConstraints= @UniqueConstraint(columnNames = {"patient_id", "consultation_id", "position"}))
 public class Appointment implements Serializable{
 
 	private static final long serialVersionUID = -1397176648342175197L;

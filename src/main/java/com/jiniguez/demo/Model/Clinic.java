@@ -16,9 +16,6 @@ import lombok.Data;
 @Data
 public class Clinic  implements Serializable{
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = -8669217675983589571L;
 
 	@Id

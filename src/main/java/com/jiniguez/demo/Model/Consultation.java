@@ -13,8 +13,10 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.persistence.UniqueConstraint;
 
 import org.dozer.Mapping;
 
@@ -22,6 +24,7 @@ import lombok.Data;
 
 @Entity
 @Data
+@Table(uniqueConstraints= @UniqueConstraint(columnNames = {"room_id", "doctor_id", "day", "turn"}))
 public class Consultation implements Serializable {
 	private static final long serialVersionUID = 8466851773235467553L;
 
