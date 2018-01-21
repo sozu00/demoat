@@ -22,7 +22,8 @@ public class ErrorController {
 	
 	@ResponseBody
 	@ExceptionHandler(Exception.class)
+	@ResponseStatus(HttpStatus.NOT_FOUND)
 	public ErrorDTO error(Exception e) {
-		return new ErrorDTO(12345, e.getMessage());
+		return new ErrorDTO(123456, e.getMessage());
 	}
 }
