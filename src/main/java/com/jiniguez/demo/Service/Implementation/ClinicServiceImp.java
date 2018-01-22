@@ -32,10 +32,13 @@ public class ClinicServiceImp implements ClinicService {
 	}
 	
 	@Override
-	public ClinicDTO findById(Integer id) throws NotFoundException {
-		Clinic a = Optional.ofNullable(clinicDAO.findOne(id))
+	public ClinicDTO findDTOById(Integer id) throws NotFoundException {
+		return clinicToDTO(findById(id));
+	}
+	@Override
+	public Clinic findById(Integer id) throws NotFoundException {
+		return Optional.ofNullable(clinicDAO.findOne(id))
         		.orElseThrow(() -> new NotFoundException());
-		return clinicToDTO(a);
 	}
 
 	@Override

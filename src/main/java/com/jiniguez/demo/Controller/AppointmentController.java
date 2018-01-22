@@ -29,17 +29,17 @@ public class AppointmentController {
 	
 	@RequestMapping(value = "/{id}", method = { RequestMethod.GET })
 	public AppointmentDTO findOneById(@PathVariable Integer id) throws NotFoundException {
-		return appointmentService.findById(id);
+		return appointmentService.findDTOById(id);
 	}
 	
 	@RequestMapping(method = {RequestMethod.POST})
-	public AppointmentDTO create(@RequestBody AppointmentDTO appointment) {
+	public AppointmentDTO create(@RequestBody AppointmentDTO appointment) throws NotFoundException {
 		return appointmentService.create(appointment);
 	}
 	
 	@RequestMapping(value = "/{id}",method = {RequestMethod.PUT})
 	public void update(@RequestBody AppointmentDTO appointment, 
-			@PathVariable("id") Integer id) {
+			@PathVariable("id") Integer id) throws NotFoundException {
 		appointmentService.update(appointment);
 	}
 	

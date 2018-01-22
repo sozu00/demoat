@@ -29,7 +29,7 @@ public class ClinicController {
 	
 	@RequestMapping(value = "/{id}", method = { RequestMethod.GET })
 	public ClinicDTO findOneById(@PathVariable Integer id) throws NotFoundException {
-		return clinicService.findById(id);
+		return clinicService.findDTOById(id);
 	}
 	
 	@RequestMapping(method = {RequestMethod.POST})

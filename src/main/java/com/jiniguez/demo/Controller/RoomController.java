@@ -29,7 +29,7 @@ public class RoomController {
 	
 	@RequestMapping(value = "/{id}", method = { RequestMethod.GET })
 	public RoomDTO findOneById(@PathVariable Integer id) throws NotFoundException {
-		return roomService.findById(id);
+		return roomService.findDTOById(id);
 	}
 	
 	@RequestMapping(method = {RequestMethod.POST})

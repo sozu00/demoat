@@ -33,10 +33,14 @@ public class DoctorServiceImpl implements DoctorService {
 	}
 	
 	@Override
-	public DoctorDTO findById(Integer id) throws NotFoundException {
-        Doctor optDoctor = Optional.ofNullable(doctorDAO.findOne(id))
-        		.orElseThrow(() -> new NotFoundException());
-        return doctorToDTO(optDoctor);
+	public DoctorDTO findDTOById(Integer id) throws NotFoundException {
+        return doctorToDTO(findById(id));
+	}
+	
+	@Override
+	public Doctor findById(Integer id) throws NotFoundException {
+        return Optional.ofNullable(doctorDAO.findOne(id))
+        		.orElseThrow(()-> new NotFoundException());
 	}
 
 	@Override

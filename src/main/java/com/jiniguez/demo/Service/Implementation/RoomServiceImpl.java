@@ -32,10 +32,14 @@ public class RoomServiceImpl implements RoomService {
 	}
 	
 	@Override
-	public RoomDTO findById(Integer id) throws NotFoundException {
-		Room a = Optional.ofNullable(roomDAO.findOne(id))
+	public Room findById(Integer id) throws NotFoundException {
+		return Optional.ofNullable(roomDAO.findOne(id))
         		.orElseThrow(() -> new NotFoundException());
-		return roomToDTO(a);
+	}
+	
+	@Override
+	public RoomDTO findDTOById(Integer id) throws NotFoundException {
+		return roomToDTO(findById(id));
 	}
 
 	@Override

@@ -25,6 +25,6 @@ public class RoomDTO implements Serializable{
 	
 	private Integer clinic_id;
 	
-	private List<Integer> consultations = new ArrayList<>();
+//	private List<Integer> consultations = new ArrayList<>();
 
 }

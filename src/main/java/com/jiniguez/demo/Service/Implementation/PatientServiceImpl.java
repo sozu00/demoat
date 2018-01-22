@@ -9,9 +9,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.jiniguez.demo.DAO.PatientDAO;
+import com.jiniguez.demo.DTO.AppointmentDTO;
 import com.jiniguez.demo.DTO.PatientDTO;
 import com.jiniguez.demo.Exceptions.NotFoundException;
+import com.jiniguez.demo.Model.Appointment;
 import com.jiniguez.demo.Model.Patient;
+import com.jiniguez.demo.Service.AppointmentService;
 import com.jiniguez.demo.Service.PatientService;
 
 @Service
@@ -19,6 +22,9 @@ public class PatientServiceImpl implements PatientService {
 
 	@Autowired
 	PatientDAO patientDAO;
+	
+	@Autowired
+	AppointmentService appointmentService;
 	
 	@Autowired
 	private DozerBeanMapper dozer;
@@ -32,10 +38,14 @@ public class PatientServiceImpl implements PatientService {
 	}
 	
 	@Override
-	public PatientDTO findById(Integer id) throws NotFoundException {
-		Patient a = Optional.ofNullable(patientDAO.findOne(id))
+	public PatientDTO findDTOById(Integer id) throws NotFoundException {
+		return patientToDTO(findById(id));
+	}
+	
+	@Override
+	public Patient findById(Integer id) throws NotFoundException {
+		return Optional.ofNullable(patientDAO.findOne(id))
         		.orElseThrow(() -> new NotFoundException());
-		return patientToDTO(a);
 	}
 
 	@Override
@@ -64,5 +74,16 @@ public class PatientServiceImpl implements PatientService {
 	@Override
 	public void delete(Integer id) {
 		patientDAO.delete(id);
+	}
+
+	@Override
+	public List<AppointmentDTO> findAppointments(Integer id) throws NotFoundException{
+		Patient p = Optional.ofNullable(patientDAO.findOne(id))
+        		.orElseThrow(() -> new NotFoundException());
+		List<AppointmentDTO> result = new ArrayList<AppointmentDTO>();
+		for (Appointment a : p.getAppointments()) {
+			result.add(appointmentService.findDTOById(a.getId()));
+		}
+		return result;
 	}
 }

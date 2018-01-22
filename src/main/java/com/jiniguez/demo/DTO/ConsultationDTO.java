@@ -23,7 +23,7 @@ public class ConsultationDTO implements Serializable{
 	}
 	private Integer id;
 	
-	private List<Integer> appointments = new ArrayList<>();
+//	private List<Integer> appointments = new ArrayList<>();
 
 	private Integer doctor_id;
 	

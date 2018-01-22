@@ -1,5 +1,6 @@
 package com.jiniguez.demo.Controller;
 
+import java.text.ParseException;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,17 +30,17 @@ public class ConsultationController {
 	
 	@RequestMapping(value = "/{id}", method = { RequestMethod.GET })
 	public ConsultationDTO findOneById(@PathVariable Integer id) throws NotFoundException {
-		return consultationService.findById(id);
+		return consultationService.findDTOById(id);
 	}
 	
 	@RequestMapping(method = {RequestMethod.POST})
-	public ConsultationDTO create(@RequestBody ConsultationDTO consultation) {
+	public ConsultationDTO create(@RequestBody ConsultationDTO consultation) throws ParseException, NotFoundException {
 		return consultationService.create(consultation);
 	}
 	
 	@RequestMapping(value = "/{id}",method = {RequestMethod.PUT})
 	public void update(@RequestBody ConsultationDTO consultation, 
-			@PathVariable("id") Integer id) {
+			@PathVariable("id") Integer id) throws ParseException, NotFoundException {
 		consultationService.update(consultation);
 	}
 	

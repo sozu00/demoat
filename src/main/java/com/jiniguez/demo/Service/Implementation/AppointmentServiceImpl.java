@@ -10,9 +10,13 @@ import org.springframework.stereotype.Service;
 
 import com.jiniguez.demo.DAO.AppointmentDAO;
 import com.jiniguez.demo.DTO.AppointmentDTO;
+import com.jiniguez.demo.DTO.PatientDTO;
 import com.jiniguez.demo.Exceptions.NotFoundException;
 import com.jiniguez.demo.Model.Appointment;
+import com.jiniguez.demo.Model.Patient;
 import com.jiniguez.demo.Service.AppointmentService;
+import com.jiniguez.demo.Service.ConsultationService;
+import com.jiniguez.demo.Service.PatientService;
 
 @Service
 public class AppointmentServiceImpl implements AppointmentService {
@@ -21,21 +25,37 @@ public class AppointmentServiceImpl implements AppointmentService {
 	AppointmentDAO appointmentDAO;
 	
 	@Autowired
+	PatientService patientService;
+
+	@Autowired
+	ConsultationService consultationService;
+	
+	@Autowired
 	private DozerBeanMapper dozer;
 
 	private AppointmentDTO appointmentToDTO(Appointment appointment) {
 		return dozer.map(appointment, AppointmentDTO.class);
 	}
 	
-	private Appointment DTOToAppointment(AppointmentDTO appointment) {
-		return dozer.map(appointment, Appointment.class);
+	private Appointment DTOToAppointment(AppointmentDTO appointment) throws NotFoundException {
+		Appointment a = new Appointment();
+		a.setId(appointment.getId());
+		a.setPosition(appointment.getPosition());
+		a.setPatient(patientService.findById(appointment.getPatient_id()));
+		a.setConsultation(consultationService.findById(appointment.getConsultation_id()));
+		return a;
 	}
 	
 	@Override
-	public AppointmentDTO findById(Integer id) throws NotFoundException {
+	public AppointmentDTO findDTOById(Integer id) throws NotFoundException {
+		return appointmentToDTO(findById(id));
+	}
+	
+	@Override
+	public Appointment findById(Integer id) throws NotFoundException {
 		Appointment a = Optional.ofNullable(appointmentDAO.findOne(id))
         		.orElseThrow(() -> new NotFoundException());
-		return appointmentToDTO(a);
+		return a;
 	}
 
 	@Override
@@ -50,13 +70,13 @@ public class AppointmentServiceImpl implements AppointmentService {
 	}
 	
 	@Override
-	public AppointmentDTO create(AppointmentDTO appointment) {
+	public AppointmentDTO create(AppointmentDTO appointment) throws NotFoundException {
 		final Appointment a = DTOToAppointment(appointment);
 		return appointmentToDTO(appointmentDAO.save(a));
 	}
 
 	@Override
-	public void update(AppointmentDTO appointment) {
+	public void update(AppointmentDTO appointment) throws NotFoundException {
 		final Appointment a = DTOToAppointment(appointment);
 		appointmentDAO.save(a);		
 	}

@@ -22,6 +22,6 @@ public class PatientDTO implements Serializable{
 
 	private String name;
 	
-	private List<Integer> appointments = new ArrayList<>();
+//	private List<Integer> appointments = new ArrayList<>();
 	
 }
