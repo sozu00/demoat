@@ -1,7 +1,8 @@
-package com.jiniguez.demo;
+package com.jiniguez.demo.Service;
 
 import org.dozer.DozerBeanMapper;
 import org.junit.Assert;
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
@@ -19,6 +20,14 @@ import com.jiniguez.demo.Service.Implementation.DoctorServiceImpl;
 @RunWith(MockitoJUnitRunner.class)
 public class TestDoctorService {
 
+	private static final Integer ID = 8;
+
+	private static final String EMAIL = "correito@correito.com";
+
+	private static final String NAME = "nombresito";
+
+	private static Doctor DOCTOR = new Doctor();
+	
 	@InjectMocks 
 	private DoctorService service = new DoctorServiceImpl();
 
@@ -27,18 +36,22 @@ public class TestDoctorService {
 	
 	@Mock
 	private DozerBeanMapper dozer;
-
+	
+	@Before
+	public void init() {
+		DOCTOR.setId(ID);
+		DOCTOR.setEmail(EMAIL);
+		DOCTOR.setName(NAME);
+		Mockito.when(doctorDAO.findOne(ID)).thenReturn(DOCTOR);
+	}
+	
 	
 	@Test
 	public void testFindByIdBase() throws NotFoundException {
-		final Doctor doctor = mockDoctor();
-		
-		Mockito.when(doctorDAO.findOne(8)).thenReturn(doctor);
-		
-		final Doctor res = service.findById(8);
-		
+		final Doctor res = service.findById(ID);
+
 		Assert.assertNotNull(res);
-		Assert.assertEquals("Jesus", res.getName());
+		Assert.assertEquals(NAME, res.getName());
 	}
 	
 	
@@ -49,10 +62,4 @@ public class TestDoctorService {
 	}
 
 
-	private Doctor mockDoctor() {
-		final Doctor doctor = new Doctor();
-		doctor.setId(8);
-		doctor.setName("Jesus");
-		return doctor;
-	}
 }

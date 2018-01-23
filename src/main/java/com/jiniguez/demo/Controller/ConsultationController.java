@@ -34,13 +34,13 @@ public class ConsultationController {
 	}
 	
 	@RequestMapping(method = {RequestMethod.POST})
-	public ConsultationDTO create(@RequestBody ConsultationDTO consultation) throws ParseException, NotFoundException {
+	public ConsultationDTO create(@RequestBody ConsultationDTO consultation) throws NotFoundException {
 		return consultationService.create(consultation);
 	}
 	
 	@RequestMapping(value = "/{id}",method = {RequestMethod.PUT})
 	public void update(@RequestBody ConsultationDTO consultation, 
-			@PathVariable("id") Integer id) throws ParseException, NotFoundException {
+			@PathVariable("id") Integer id) throws NotFoundException {
 		consultationService.update(consultation);
 	}
 	

@@ -3,12 +3,15 @@ package com.jiniguez.demo.Controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.client.RestTemplate;
 
 import com.jiniguez.demo.DTO.DoctorDTO;
 import com.jiniguez.demo.Exceptions.NotFoundException;
@@ -21,7 +24,7 @@ public class DoctorController {
 	@Autowired
 	private DoctorService doctorService;
 	
-	@RequestMapping(method = RequestMethod.GET)
+	@RequestMapping(method = {RequestMethod.GET})
 	public List<DoctorDTO> findAll(@RequestParam(required=false) Integer page,
 			@RequestParam(required = false) Integer size){
 		return doctorService.findAll(page, size);
@@ -58,5 +61,22 @@ public class DoctorController {
 			@PathVariable("id") Integer id) {
 		doctorService.delete(id);
 	}
+	
+	/*
+	 * EJEMPLO REST CONSUME
+	 */
+//	@Autowired
+//	private RestTemplate restTemplate;
+//	
+//	@RequestMapping(value = "/")
+//	public DoctorDTO index() {
+//		
+//		DoctorDTO resultado = restTemplate.getForObject("http:localhost:PUERTO", DoctorDTO.class);
+//		resultado = restTemplate.postForObject("localhost:PUERTO", resultado, DoctorDTO.class);
+//		restTemplate.put("localhost:PUERTO", resultado);
+//		restTemplate.delete("localhost:PUERTO/doctor/1");
+//		
+//		return resultado;
+//	}
 }
 

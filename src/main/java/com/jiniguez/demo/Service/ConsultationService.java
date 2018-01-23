@@ -15,9 +15,9 @@ public interface ConsultationService {
 
 	List<ConsultationDTO> findAll(Integer page, Integer size);
 
-	ConsultationDTO create(ConsultationDTO consultation) throws ParseException, NotFoundException;
+	ConsultationDTO create(ConsultationDTO consultation) throws  NotFoundException;
 
-	void update(ConsultationDTO consultation) throws ParseException, NotFoundException;
+	void update(ConsultationDTO consultation) throws  NotFoundException;
 
 	void delete(Integer id);
 

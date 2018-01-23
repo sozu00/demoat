@@ -40,10 +40,9 @@ public class ConsultationServiceImpl implements ConsultationService {
 		return dozer.map(consultation, ConsultationDTO.class);
 	}
 	
-	private Consultation DTOToConsultation(ConsultationDTO consultation) throws ParseException, NotFoundException {
+	private Consultation DTOToConsultation(ConsultationDTO consultation) throws NotFoundException {
 		Consultation c = new Consultation();
-        SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy");
-		c.setDay(formatter.parse(consultation.getDay()));
+		c.setDay(new Date(Long.parseLong(consultation.getDay())));
 		c.setId(consultation.getId());
 		c.setTurn(consultation.getTurn());
 		c.setDoctor(doctorService.findById(consultation.getDoctor_id()));
@@ -74,13 +73,13 @@ public class ConsultationServiceImpl implements ConsultationService {
 	}
 	
 	@Override
-	public ConsultationDTO create(ConsultationDTO consultation) throws ParseException, NotFoundException {
+	public ConsultationDTO create(ConsultationDTO consultation) throws  NotFoundException {
 		final Consultation a = DTOToConsultation(consultation);
 		return consultationToDTO(consultationDAO.save(a));
 	}
 
 	@Override
-	public void update(ConsultationDTO consultation) throws ParseException, NotFoundException {
+	public void update(ConsultationDTO consultation) throws  NotFoundException {
 		final Consultation a = DTOToConsultation(consultation);
 		consultationDAO.save(a);		
 	}

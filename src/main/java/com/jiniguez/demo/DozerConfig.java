@@ -12,15 +12,6 @@ import com.jiniguez.demo.Model.Appointment;
 public class DozerConfig {
 	@Bean
 	public DozerBeanMapper dozer() {
-		DozerBeanMapper dozer = new DozerBeanMapper();
-		dozer.addMapping(new BeanMappingBuilder() {
-			@Override
-			protected void configure() {
-				mapping(AppointmentDTO.class, Appointment.class)
-				.fields("patient_id", "patient.id")
-				.fields("consultation_id", "consultation.id");
-			}
-		});
-		return dozer;
+		return new DozerBeanMapper();
 	}
 }

@@ -85,8 +85,12 @@ public class DoctorServiceImpl implements DoctorService {
 
 	@Override
 	public List<DoctorDTO> findTopNDoctorsWithMorePatients(Integer num) {
-		List<DoctorDTO> list = doctorDAO.findTopNDoctorsWithMorePatients();
-		return list.stream().limit(num).collect(Collectors.toList());
+		List<Doctor> list = doctorDAO.findTopNDoctorsWithMorePatients();
+		List<DoctorDTO> result = new ArrayList<>();
+		list.stream().limit(num).collect(Collectors.toList()).forEach((d)->{
+			result.add(doctorToDTO(d));
+		});
+		return result;
 	}
 
 }
