@@ -1,11 +1,11 @@
 package com.jiniguez.demo.Service.Implementation;
 
-	import java.util.ArrayList;
-import java.util.Date;
+	import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-import org.dozer.DozerBeanMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -35,22 +35,29 @@ public class ConsultationServiceImpl implements ConsultationService {
 
 	@Autowired
 	private AppointmentService appointmentService;
-	
-	@Autowired
-	private DozerBeanMapper dozer;
 
 	@Override
 	public ConsultationDTO consultationToDTO(Consultation consultation) {
-		return dozer.map(consultation, ConsultationDTO.class);
+		ConsultationDTO c = new ConsultationDTO();
+		SimpleDateFormat s = new SimpleDateFormat("DD-MM-YY");
+
+		c.setDay(s.format(consultation.getDay()));
+		c.setTurn(consultation.getTurn());
+		c.setDoctor_internal_id(consultation.getDoctor().getInternalId());
+		c.setId(consultation.getId());
+		c.setRoom_id(consultation.getRoom().getId());
+		
+		return c;
 	}
 	
 	@Override
-	public Consultation DTOToConsultation(ConsultationDTO consultation) throws NotFoundException {
+	public Consultation DTOToConsultation(ConsultationDTO consultation) throws NotFoundException, ParseException {
 		Consultation c = Optional.ofNullable(consultationDAO.findOne(consultation.getId())).orElse(new Consultation());
-		
-		c.setDay(new Date(Long.parseLong(consultation.getDay())));
+		SimpleDateFormat s = new SimpleDateFormat("DD-MM-YY");
+
+		c.setDay(s.parse(consultation.getDay()));
 		c.setTurn(consultation.getTurn());
-		c.setDoctor(doctorService.findById(consultation.getDoctor_id()));
+		c.setDoctor(doctorService.findById(consultation.getDoctor_internal_id()));
 		c.setRoom(roomService.findById(consultation.getRoom_id()));
 		return c;
 	}
@@ -86,13 +93,13 @@ public class ConsultationServiceImpl implements ConsultationService {
 	}
 	
 	@Override
-	public ConsultationDTO create(ConsultationDTO consultation) throws  NotFoundException {
+	public ConsultationDTO create(ConsultationDTO consultation) throws  NotFoundException, ParseException {
 		final Consultation a = DTOToConsultation(consultation);
 		return consultationToDTO(consultationDAO.save(a));
 	}
 
 	@Override
-	public void update(ConsultationDTO consultation) throws  NotFoundException {
+	public void update(ConsultationDTO consultation) throws  NotFoundException, ParseException {
 		final Consultation a = DTOToConsultation(consultation);
 		consultationDAO.save(a);		
 	}
@@ -105,6 +112,14 @@ public class ConsultationServiceImpl implements ConsultationService {
 	@Override
 	public DoctorDTO findDoctorByConsultaId(Integer id) throws NotFoundException {
 		ConsultationDTO aDTO = consultationToDTO(consultationDAO.findOne(id));
-		return doctorService.findDTOById(aDTO.getDoctor_id());
+		return doctorService.findDTOById(aDTO.getDoctor_internal_id());
+	}
+
+	@Override
+	public List<Consultation> findAll() {
+		final Iterable<Consultation> findAll = consultationDAO.findAll();
+		List<Consultation> list = new ArrayList<>();
+		findAll.forEach(list::add);
+		return list;
 	}
 }

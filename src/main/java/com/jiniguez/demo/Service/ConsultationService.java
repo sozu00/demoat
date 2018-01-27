@@ -1,5 +1,6 @@
 package com.jiniguez.demo.Service;
 
+import java.text.ParseException;
 import java.util.List;
 
 import com.jiniguez.demo.DTO.AppointmentDTO;
@@ -15,10 +16,11 @@ public interface ConsultationService {
 	DoctorDTO findDoctorByConsultaId(Integer id) throws NotFoundException;
 
 	List<ConsultationDTO> findAll(Integer page, Integer size);
+	List<Consultation> findAll();
 
-	ConsultationDTO create(ConsultationDTO consultation) throws  NotFoundException;
+	ConsultationDTO create(ConsultationDTO consultation) throws  NotFoundException, ParseException;
 
-	void update(ConsultationDTO consultation) throws  NotFoundException;
+	void update(ConsultationDTO consultation) throws  NotFoundException, ParseException;
 
 	void delete(Integer id);
 
@@ -26,7 +28,7 @@ public interface ConsultationService {
 
 	ConsultationDTO consultationToDTO(Consultation consultation);
 
-	Consultation DTOToConsultation(ConsultationDTO consultation) throws NotFoundException;
+	Consultation DTOToConsultation(ConsultationDTO consultation) throws NotFoundException, ParseException;
 
 	List<AppointmentDTO> findAppointments(Integer id) throws NotFoundException;
 }

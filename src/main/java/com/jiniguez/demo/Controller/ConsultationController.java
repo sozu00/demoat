@@ -1,5 +1,6 @@
 package com.jiniguez.demo.Controller;
 
+import java.text.ParseException;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,13 +40,13 @@ public class ConsultationController {
 	}
 	
 	@RequestMapping(method = {RequestMethod.POST})
-	public ConsultationDTO create(@RequestBody ConsultationDTO consultation) throws NotFoundException {
+	public ConsultationDTO create(@RequestBody ConsultationDTO consultation) throws NotFoundException, ParseException {
 		return consultationService.create(consultation);
 	}
 	
 	@RequestMapping(value = "/{id}",method = {RequestMethod.PUT})
 	public void update(@RequestBody ConsultationDTO consultation, 
-			@PathVariable("id") Integer id) throws NotFoundException {
+			@PathVariable("id") Integer id) throws NotFoundException, ParseException {
 		consultationService.update(consultation);
 	}
 	

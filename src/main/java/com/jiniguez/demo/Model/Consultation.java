@@ -13,10 +13,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
-import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
-import javax.persistence.UniqueConstraint;
 
 import org.dozer.Mapping;
 
@@ -24,7 +22,7 @@ import lombok.Data;
 
 @Entity
 @Data
-@Table(uniqueConstraints= @UniqueConstraint(columnNames = {"room_id", "doctor_id", "day", "turn"}))
+//@Table(uniqueConstraints= @UniqueConstraint(columnNames = {"room_id", "doctor_internalId", "day", "turn"}))
 public class Consultation implements Serializable {
 	private static final long serialVersionUID = 8466851773235467553L;
 
@@ -35,7 +33,7 @@ public class Consultation implements Serializable {
 	@OneToMany(fetch = FetchType.LAZY,mappedBy="consultation")
 	private List<Appointment> appointments = new ArrayList<Appointment>();
 
-	@Mapping("doctor_id")
+	@Mapping("doctor_internal_id")
 	@ManyToOne(fetch = FetchType.LAZY)
 	private Doctor doctor;
 	

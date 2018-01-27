@@ -1,6 +1,7 @@
 package com.jiniguez.demo.DTO;
 
 import java.io.Serializable;
+import java.sql.Timestamp;
 
 import com.jiniguez.demo.Model.Turn;
 
@@ -13,12 +14,11 @@ public class ConsultationDTO implements Serializable{
 
 	private Integer id;
 	
-	private Integer doctor_id;
+	private Integer doctor_internal_id;
 	
 	private Integer room_id;
 	
 	private String day;
 	
 	private Turn turn;
-	
 }

@@ -11,6 +11,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
+import org.dozer.Mapping;
+
 import lombok.Data;
 
 @Entity
@@ -21,17 +23,22 @@ public class Doctor  implements Serializable{
 
 	@Id
 	@GeneratedValue
-	@Column(name = "id") //Para acceder desde las querys
-	private Integer id;
+	@Column(name = "internalId") //Para acceder desde las querys
+	private Integer internalId;
+	
+	@Column(name= "externalID")
+	private String id;
 	
 	private String name;
 	
 	private String email;
 	
+	private Double price;
+	
 	@OneToMany(fetch = FetchType.LAZY, mappedBy="doctor")
 	private List<Consultation> consultations = new ArrayList<Consultation>();
 	
 	public String toString(){
-		return id.toString();
+		return internalId.toString();
 	}
 }

@@ -1,5 +1,6 @@
 package com.jiniguez.demo.Controller;
 
+import java.text.ParseException;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.jiniguez.demo.DTO.ConsultationDTO;
 import com.jiniguez.demo.DTO.DoctorDTO;
 import com.jiniguez.demo.DTO.PatientDTO;
+import com.jiniguez.demo.DTO.StatisticsDTO;
 import com.jiniguez.demo.Exceptions.NotFoundException;
 import com.jiniguez.demo.Service.DoctorService;
 
@@ -32,6 +34,11 @@ public class DoctorController {
 	@RequestMapping(value = "/{id}", method = { RequestMethod.GET })
 	public DoctorDTO findOneById(@PathVariable Integer id) throws NotFoundException{
 		return doctorService.findDTOById(id);
+	}
+	
+	@RequestMapping(value = "/external/{id}", method = { RequestMethod.GET })
+	public DoctorDTO findOneByExternalId(@RequestParam(required=true) String id) throws NotFoundException{
+		return doctorService.doctorToDTO(doctorService.findByExternalId(id));
 	}
 	
 	@RequestMapping(value = "/{id}/patients", method = { RequestMethod.GET })
@@ -71,22 +78,10 @@ public class DoctorController {
 		doctorService.delete(id);
 	}
 	
-	/*
-	 * EJEMPLO REST CONSUME
-	 */
-//	@Autowired
-//	private RestTemplate restTemplate;
-//	
-//	@RequestMapping(value = "/")
-//	public DoctorDTO index() {
-//		http://doctor.dbgjerez.es:8080/api/doctor?page=3&size=3
-//		Recorrer todas las paginas.
-//		DoctorDTO resultado = restTemplate.getForObject("http:localhost:PUERTO", DoctorDTO.class);
-//		resultado = restTemplate.postForObject("localhost:PUERTO", resultado, DoctorDTO.class);
-//		restTemplate.put("localhost:PUERTO", resultado);
-//		restTemplate.delete("localhost:PUERTO/doctor/1");	
-//		
-//		return resultado;
-//	}
+	@RequestMapping(value = "/stats",method = {RequestMethod.GET})
+	public List<StatisticsDTO> getStats(@RequestParam(required=false) String initDate,
+			@RequestParam(required = false) String endDate) throws NotFoundException, ParseException {
+		return doctorService.getStats(initDate, endDate);
+	}
 }
 

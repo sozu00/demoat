@@ -101,8 +101,8 @@ public class ClinicServiceImpl implements ClinicService {
 		.forEach(r -> {
 			r.getConsultations()
 			.forEach(c ->{
-				if(!doctors.containsKey(c.getDoctor().getId()))
-					doctors.put(c.getDoctor().getId(),doctorService.doctorToDTO(c.getDoctor()));
+				if(!doctors.containsKey(c.getDoctor().getInternalId()))
+					doctors.put(c.getDoctor().getInternalId(),doctorService.doctorToDTO(c.getDoctor()));
 			});
 		});
 		

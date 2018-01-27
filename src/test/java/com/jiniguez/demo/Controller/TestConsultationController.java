@@ -37,12 +37,12 @@ public class TestConsultationController {
 	@Before
 	public void init() throws NotFoundException, ParseException {
 		consultationDTO.setId(ID);
-		consultationDTO.setDoctor_id(ID);
+		consultationDTO.setDoctor_internal_id(ID);
 		consultationDTO.setRoom_id(ID);
 		consultationDTO.setTurn(T);
 		
 		consultationDTOException.setId(1);
-		consultationDTOException.setDoctor_id(-1);
+		consultationDTOException.setDoctor_internal_id(-1);
 		
 		listDTO.add(consultationDTO);
 		Mockito.when(consultationService.findAll(PAGE, SIZE)).thenReturn(listDTO);

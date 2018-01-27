@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.PagingAndSortingRepository;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import com.jiniguez.demo.Model.Doctor;
@@ -16,7 +17,7 @@ public interface DoctorDAO extends PagingAndSortingRepository<Doctor, Integer>{
 	@Query(value = "select d from Doctor d  "
 			+ " join d.consultations c "
 			+ " join c.appointments a"
-			+ " group by d.id"
+			+ " group by d.internalId"
 			+ " order by count(distinct a.patient) desc")
 	List<Doctor> findTopNDoctorsWithMorePatients();
 /*	QUERY
@@ -27,6 +28,9 @@ public interface DoctorDAO extends PagingAndSortingRepository<Doctor, Integer>{
   	group by d.id
   	order by count(distinct a.patient_id) DESC
  */
+
+	@Query(value = "select d from Doctor d where d.id = :externalID")
+	Doctor findOneByExternalID(@Param("externalID") String externalID);
 
 	/*
 	 * Recupera todos los libros del usuario que contengan title y su id sea idUser

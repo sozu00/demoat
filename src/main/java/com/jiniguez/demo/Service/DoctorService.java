@@ -1,10 +1,12 @@
 package com.jiniguez.demo.Service;
 
+import java.text.ParseException;
 import java.util.List;
 
 import com.jiniguez.demo.DTO.ConsultationDTO;
 import com.jiniguez.demo.DTO.DoctorDTO;
 import com.jiniguez.demo.DTO.PatientDTO;
+import com.jiniguez.demo.DTO.StatisticsDTO;
 import com.jiniguez.demo.Exceptions.NotFoundException;
 import com.jiniguez.demo.Model.Doctor;
 
@@ -34,4 +36,7 @@ public interface DoctorService {
 
 	List<ConsultationDTO> findConsultations(Integer id) throws NotFoundException;
 
+	List<StatisticsDTO> getStats(String initDate, String endDate) throws NotFoundException, ParseException;
+
+	Doctor findByExternalId(String externalID);
 }

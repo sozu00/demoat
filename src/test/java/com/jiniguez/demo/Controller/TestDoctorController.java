@@ -37,9 +37,9 @@ public class TestDoctorController {
 	
 	@Before
 	public void initDoctor() throws NotFoundException {
-		doctorDTO.setId(ID);
+		doctorDTO.setInternalId(ID);
 		doctorDTO.setName(NAME);
-		doctorDTOException.setId(IDException);
+		doctorDTOException.setInternalId(IDException);
 		doctorDTOException.setName(NAME);
 		
 		listDTO.add(doctorDTO);

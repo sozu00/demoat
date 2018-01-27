@@ -1,7 +1,7 @@
 
 use demoat; 
 
-drop procedure createDoctors;
+/*drop procedure createDoctors;*/
 drop procedure createPatient;
 drop procedure createClinics;
 drop procedure createRooms;
@@ -60,7 +60,7 @@ CREATE PROCEDURE createConsultations()
 BEGIN
     DECLARE i int DEFAULT 1;
     WHILE i <= 10 DO
-        INSERT INTO consultation(day, turn, doctor_id, room_id) VALUES (curdate(),"M", i,i);
+        INSERT INTO consultation(day, turn, doctor_internal_id, room_id) VALUES (curdate(),"M", i,i);
         SET i = i + 1;
     END WHILE;
 END$$
@@ -82,9 +82,9 @@ CREATE PROCEDURE createAll()
 BEGIN
   DECLARE EXIT HANDLER FOR 1452 ROLLBACK;
   START TRANSACTION;
-  	call createDoctors;
-  	call createPatient;
-  	call createClinics;
+	/*call createDoctors;*/
+	call createPatient;
+	call createClinics;
   	call createRooms;
   	call createConsultations;
   	call createAppointment;

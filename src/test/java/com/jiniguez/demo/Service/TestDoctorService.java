@@ -37,7 +37,7 @@ public class TestDoctorService {
 	
 	@Before
 	public void init() {
-		DOCTOR.setId(ID);
+		DOCTOR.setInternalId(ID);
 		DOCTOR.setEmail(EMAIL);
 		DOCTOR.setName(NAME);
 		Mockito.when(doctorDAO.findOne(ID)).thenReturn(DOCTOR);
