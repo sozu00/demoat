@@ -9,6 +9,7 @@ import org.dozer.DozerBeanMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.jiniguez.demo.Config.CustomPageRequest;
 import com.jiniguez.demo.DAO.ConsultationDAO;
 import com.jiniguez.demo.DTO.AppointmentDTO;
 import com.jiniguez.demo.DTO.ConsultationDTO;
@@ -75,7 +76,7 @@ public class ConsultationServiceImpl implements ConsultationService {
 	
 	@Override
 	public List<ConsultationDTO> findAll(Integer page, Integer size) {
-		final Iterable<Consultation> findAll = consultationDAO.findAll();
+		final Iterable<Consultation> findAll = consultationDAO.findAll(CustomPageRequest.newPageRequest(page, size));
 		final List<ConsultationDTO> res = new ArrayList<>();
 		findAll.forEach(b ->{
 				final ConsultationDTO aDTO = consultationToDTO(b);

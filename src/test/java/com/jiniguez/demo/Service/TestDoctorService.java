@@ -11,10 +11,8 @@ import org.mockito.Mockito;
 import org.mockito.runners.MockitoJUnitRunner;
 
 import com.jiniguez.demo.DAO.DoctorDAO;
-import com.jiniguez.demo.DTO.DoctorDTO;
 import com.jiniguez.demo.Exceptions.NotFoundException;
 import com.jiniguez.demo.Model.Doctor;
-import com.jiniguez.demo.Service.DoctorService;
 import com.jiniguez.demo.Service.Implementation.DoctorServiceImpl;
 
 @RunWith(MockitoJUnitRunner.class)

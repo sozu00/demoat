@@ -11,9 +11,6 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.runners.MockitoJUnitRunner;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.jiniguez.demo.DTO.AppointmentDTO;
 import com.jiniguez.demo.DTO.PatientDTO;
@@ -27,7 +24,6 @@ public class TestPatientController {
 	private static final Integer IDException = -1;
 	private static final Integer PAGE = 1;
 	private static final Integer SIZE = 10;
-	private static final Integer NUM = 1;
 	private static final String NAME = "nombre";
 	private PatientDTO patientDTO = new PatientDTO();
 	private PatientDTO patientDTOException = new PatientDTO();

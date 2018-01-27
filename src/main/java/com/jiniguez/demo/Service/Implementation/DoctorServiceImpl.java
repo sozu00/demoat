@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
+import com.jiniguez.demo.Config.CustomPageRequest;
 import com.jiniguez.demo.DAO.DoctorDAO;
 import com.jiniguez.demo.DTO.ConsultationDTO;
 import com.jiniguez.demo.DTO.DoctorDTO;
@@ -64,7 +65,7 @@ public class DoctorServiceImpl implements DoctorService {
 
 	@Override
 	public List<DoctorDTO> findAll(Integer page, Integer size) {
-		final Iterable<Doctor> findAll = doctorDAO.findAll(new PageRequest(page, size));
+		final Iterable<Doctor> findAll = doctorDAO.findAll(CustomPageRequest.newPageRequest(page, size));
 		final List<DoctorDTO> res = new ArrayList<>();
 		findAll.forEach(b ->{
 				final DoctorDTO aDTO = doctorToDTO(b);

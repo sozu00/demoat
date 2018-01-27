@@ -8,6 +8,7 @@ import org.dozer.DozerBeanMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.jiniguez.demo.Config.CustomPageRequest;
 import com.jiniguez.demo.DAO.AppointmentDAO;
 import com.jiniguez.demo.DTO.AppointmentDTO;
 import com.jiniguez.demo.DTO.ConsultationDTO;
@@ -73,7 +74,7 @@ public class AppointmentServiceImpl implements AppointmentService {
 
 	@Override
 	public List<AppointmentDTO> findAll(Integer page, Integer size) {
-		final Iterable<Appointment> findAll = appointmentDAO.findAll();
+		final Iterable<Appointment> findAll = appointmentDAO.findAll(CustomPageRequest.newPageRequest(page, size));
 		final List<AppointmentDTO> res = new ArrayList<>();
 		findAll.forEach(b ->{
 				final AppointmentDTO aDTO = appointmentToDTO(b);

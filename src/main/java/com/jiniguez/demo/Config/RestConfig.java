@@ -1,4 +1,4 @@
-package com.jiniguez.demo;
+package com.jiniguez.demo.Config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

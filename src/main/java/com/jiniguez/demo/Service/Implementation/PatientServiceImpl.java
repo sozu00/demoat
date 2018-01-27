@@ -8,6 +8,7 @@ import org.dozer.DozerBeanMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.jiniguez.demo.Config.CustomPageRequest;
 import com.jiniguez.demo.DAO.PatientDAO;
 import com.jiniguez.demo.DTO.AppointmentDTO;
 import com.jiniguez.demo.DTO.PatientDTO;
@@ -55,7 +56,7 @@ public class PatientServiceImpl implements PatientService {
 
 	@Override
 	public List<PatientDTO> findAll(Integer page, Integer size) {
-		final Iterable<Patient> findAll = patientDAO.findAll();
+		final Iterable<Patient> findAll = patientDAO.findAll(CustomPageRequest.newPageRequest(page, size));
 		final List<PatientDTO> res = new ArrayList<>();
 		findAll.forEach(b ->{
 				final PatientDTO aDTO = patientToDTO(b);

@@ -1,12 +1,9 @@
 package com.jiniguez.demo.Controller;
 
-import static org.junit.Assert.*;
-
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.dozer.DozerBeanMapper;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -15,26 +12,16 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.runners.MockitoJUnitRunner;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 
-import com.jiniguez.demo.DAO.DoctorDAO;
 import com.jiniguez.demo.DTO.ConsultationDTO;
 import com.jiniguez.demo.Exceptions.NotFoundException;
 import com.jiniguez.demo.Model.Turn;
 import com.jiniguez.demo.Service.ConsultationService;
-import com.jiniguez.demo.Service.DoctorService;
-import com.jiniguez.demo.Service.Implementation.DoctorServiceImpl;
 
 @RunWith(MockitoJUnitRunner.class)
 public class TestConsultationController {
 
 	private static final Integer ID = 1;
-	private static final Integer POSITION = 1;
 	private static final Turn T = Turn.M;
 	private static Integer PAGE = 1;
 	private static Integer SIZE = 10;

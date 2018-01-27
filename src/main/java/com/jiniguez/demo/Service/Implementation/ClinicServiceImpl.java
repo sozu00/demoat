@@ -10,6 +10,7 @@ import org.dozer.DozerBeanMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.jiniguez.demo.Config.CustomPageRequest;
 import com.jiniguez.demo.DAO.ClinicDAO;
 import com.jiniguez.demo.DTO.ClinicDTO;
 import com.jiniguez.demo.DTO.DoctorDTO;
@@ -64,7 +65,7 @@ public class ClinicServiceImpl implements ClinicService {
 
 	@Override
 	public List<ClinicDTO> findAll(Integer page, Integer size) {
-		final Iterable<Clinic> findAll = clinicDAO.findAll();
+		final Iterable<Clinic> findAll = clinicDAO.findAll(CustomPageRequest.newPageRequest(page, size));
 		final List<ClinicDTO> res = new ArrayList<>();
 		findAll.forEach(b ->{
 				final ClinicDTO aDTO = clinicToDTO(b);
