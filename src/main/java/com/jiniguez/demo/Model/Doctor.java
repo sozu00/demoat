@@ -11,8 +11,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
-import org.dozer.Mapping;
-
 import lombok.Data;
 
 @Entity

@@ -1,7 +1,6 @@
 package com.jiniguez.demo.DTO;
 
 import java.io.Serializable;
-import java.sql.Timestamp;
 
 import com.jiniguez.demo.Model.Turn;
 

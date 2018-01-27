@@ -75,7 +75,7 @@ public class TestConsultationController {
 	}
 	
 	@Test
-	public void TestCreate() throws NotFoundException {
+	public void TestCreate() throws NotFoundException, ParseException {
 		ConsultationDTO result = consultationController.create(consultationDTO);
 		
 		Assert.assertNotNull(result);
@@ -83,12 +83,12 @@ public class TestConsultationController {
 	}
 	
 	@Test(expected = NotFoundException.class)
-	public void TestCreateException() throws NotFoundException {
+	public void TestCreateException() throws NotFoundException, ParseException {
 		consultationController.create(consultationDTOException);
 	}
 	
 	@Test
-	public void TestUpdate() throws NotFoundException{
+	public void TestUpdate() throws NotFoundException, ParseException{
 		consultationController.update(consultationDTO, ID);
 	}
 	

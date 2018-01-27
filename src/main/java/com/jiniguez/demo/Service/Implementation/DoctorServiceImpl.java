@@ -1,16 +1,16 @@
 package com.jiniguez.demo.Service.Implementation;
 
-import java.sql.Timestamp;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 import java.util.stream.Collectors;
+
+import javax.annotation.PostConstruct;
 
 import org.dozer.DozerBeanMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,8 +35,7 @@ import com.jiniguez.demo.Service.PatientService;
 public class DoctorServiceImpl implements DoctorService {
 
 	/**
-	 * QUE NO SE PUEDE DE ENCONTRA, PARA QUE CUANDO YO QUIERA ENCONTRA, NO ENCUENTRE, Y PARA ENCONTRA LO NO ENCONTRADO, USO ESTA VARIABLE
-	 * DE ESTA MANERA ENCUENTRO LO QUE NO PODIA ENCONTRAR
+	 * Para evitar casos en los que se envia un ID null y no es posible buscarlo, se usa esta constante, que nunca debe ser asignada.
 	 */
 	private static final int NOT_FINDABLE_ID = -1;
 
@@ -55,6 +54,12 @@ public class DoctorServiceImpl implements DoctorService {
 	@Autowired
 	private DozerBeanMapper dozer;
 
+	@PostConstruct
+	public void init() {
+		loadExternalData();
+	}
+	
+	
 	@Override
 	public DoctorDTO doctorToDTO(Doctor doctor) {
 		return dozer.map(doctor, DoctorDTO.class);
@@ -79,6 +84,11 @@ public class DoctorServiceImpl implements DoctorService {
 	@Override
 	public DoctorDTO findDTOById(Integer id) throws NotFoundException {
         return doctorToDTO(findById(id));
+	}
+
+	@Override
+	public Doctor findByExternalId(String externalID) {
+		return doctorDAO.findOneByExternalID(externalID);
 	}
 	
 	@Override
@@ -164,59 +174,65 @@ public class DoctorServiceImpl implements DoctorService {
 
 	@Override
 	public List<StatisticsDTO> getStats(String initDate, String endDate) throws NotFoundException, ParseException {
-		List<StatisticsDTO> result = new ArrayList<>();
+		List<StatisticsDTO> statisticList = new ArrayList<>();
 		
 		SimpleDateFormat s = new SimpleDateFormat("DD-MM-YY");
 		
+		List<Consultation> consultations = consultationService.findAll();
+		
+		for (Consultation consultation : consultations) {
+			if(isBetween(consultation.getDay(), s.parse(initDate), s.parse(endDate))) {
+				addConsultationStats(statisticList, consultation);
+			}
+		}
+		
+		return statisticList;
+	}
+
+	private void addConsultationStats(List<StatisticsDTO> statisticList, Consultation consultation) {
+		Double price = consultation.getDoctor().getPrice() * consultation.getAppointments().size();
+		Integer doctorID = consultation.getDoctor().getInternalId();
+		Integer totalConsultations = 1;
+		StatisticsDTO stat = new StatisticsDTO(totalConsultations, doctorID, price);
+		int index = -1;
+		
+		index = statisticList.indexOf(stat);
+		if(index!= -1) {
+			stat = statisticList.get(index);
+			stat.setTotalPrice(stat.getTotalPrice() + price);
+			stat.setConsultationsAmount(stat.getConsultationsAmount()+1);
+			statisticList.set(index, stat);
+		}else
+			statisticList.add(stat);
+	}
+
+	
+	private void loadExternalData() {
 		DoctorDTO[] doctors;
 		int j = 0;
 
 		do {
 			ResponseEntity<DoctorDTO[]> docs = restTemplate
 					.getForEntity("http://doctor.dbgjerez.es:8080/api/doctor?page="+j, DoctorDTO[].class);
-
 			doctors = docs.getBody();
-		
-			for (int i = 0; i < doctors.length; i++) {
-				doctors[i] = restTemplate.getForObject("http://doctor.dbgjerez.es:8080/api/doctor/"+doctors[i].getId(), DoctorDTO.class);
-				if(doctorDAO.findOneByExternalID(doctors[i].getId()) == null)
-					create(doctors[i]);
-			}
+			createAllDoctors(doctors);
+			
 			j++;
 		}while (doctors.length > 0);
-		
-		
-		List<Consultation> consultations = consultationService.findAll();
-		
-		for (Consultation consultation : consultations) {
-			if(isBetween(consultation.getDay(), s.parse(initDate), s.parse(endDate))) {
-				Double price = consultation.getDoctor().getPrice() * consultation.getAppointments().size();
-				Integer doctorID = consultation.getDoctor().getInternalId();
-				Integer totalConsultations = 1;
-				StatisticsDTO stat = new StatisticsDTO(totalConsultations, doctorID, price);
-				int index = -1;
-				
-				index = result.indexOf(stat);
-				if(index!= -1) {
-					stat = result.get(index);
-					stat.setTotalPrice(stat.getTotalPrice() + price);
-					stat.setConsultationsAmount(stat.getConsultationsAmount()+1);
-					result.set(index, stat);
-				}else
-					result.add(stat);
-			}
+	}
+
+
+	private void createAllDoctors(DoctorDTO[] doctors) {
+		for (int i = 0; i < doctors.length; i++) {
+			doctors[i] = restTemplate.getForObject("http://doctor.dbgjerez.es:8080/api/doctor/"+doctors[i].getId(), DoctorDTO.class);
+			if(doctorDAO.findOneByExternalID(doctors[i].getId()) == null)
+				create(doctors[i]);
 		}
-		
-		return result;
 	}
 
 	private boolean isBetween(Date dateToCheck, Date initDate, Date endDate) {
 		return !dateToCheck.before(initDate) && !dateToCheck.after(endDate);
 	}
 
-	@Override
-	public Doctor findByExternalId(String externalID) {
-		return doctorDAO.findOneByExternalID(externalID);
-	}
 
 }
