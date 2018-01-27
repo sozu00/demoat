@@ -29,12 +29,17 @@ public class PatientServiceImpl implements PatientService {
 	@Autowired
 	private DozerBeanMapper dozer;
 
-	private PatientDTO patientToDTO(Patient patient) {
+	@Override
+	public PatientDTO patientToDTO(Patient patient) {
 		return dozer.map(patient, PatientDTO.class);
 	}
 	
-	private Patient DTOTopatient(PatientDTO patient) {
-		return dozer.map(patient, Patient.class);
+	@Override
+	public Patient DTOTopatient(PatientDTO patient) {
+		Patient p = Optional.ofNullable(patientDAO.findOne(patient.getId())).orElse(new Patient());
+		p.setName(patient.getName());
+		
+		return p;
 	}
 	
 	@Override

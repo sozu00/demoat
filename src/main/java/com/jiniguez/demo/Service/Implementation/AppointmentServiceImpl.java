@@ -10,10 +10,10 @@ import org.springframework.stereotype.Service;
 
 import com.jiniguez.demo.DAO.AppointmentDAO;
 import com.jiniguez.demo.DTO.AppointmentDTO;
+import com.jiniguez.demo.DTO.ConsultationDTO;
 import com.jiniguez.demo.DTO.PatientDTO;
 import com.jiniguez.demo.Exceptions.NotFoundException;
 import com.jiniguez.demo.Model.Appointment;
-import com.jiniguez.demo.Model.Patient;
 import com.jiniguez.demo.Service.AppointmentService;
 import com.jiniguez.demo.Service.ConsultationService;
 import com.jiniguez.demo.Service.PatientService;
@@ -33,13 +33,16 @@ public class AppointmentServiceImpl implements AppointmentService {
 	@Autowired
 	private DozerBeanMapper dozer;
 
-	private AppointmentDTO appointmentToDTO(Appointment appointment) {
+	@Override
+	public AppointmentDTO appointmentToDTO(Appointment appointment) {
 		return dozer.map(appointment, AppointmentDTO.class);
 	}
 	
-	private Appointment DTOToAppointment(AppointmentDTO appointment) throws NotFoundException {
-		Appointment a = new Appointment();
-		a.setId(appointment.getId());
+	@Override
+	public Appointment DTOToAppointment(AppointmentDTO appointment) throws NotFoundException {
+		
+		Appointment a = Optional.ofNullable(appointmentDAO.findOne(appointment.getId())).orElse(new Appointment());
+		
 		a.setPosition(appointment.getPosition());
 		a.setPatient(patientService.findById(appointment.getPatient_id()));
 		a.setConsultation(consultationService.findById(appointment.getConsultation_id()));
@@ -54,8 +57,18 @@ public class AppointmentServiceImpl implements AppointmentService {
 	@Override
 	public Appointment findById(Integer id) throws NotFoundException {
 		Appointment a = Optional.ofNullable(appointmentDAO.findOne(id))
-        		.orElseThrow(() -> new NotFoundException());
+        		.orElseThrow(NotFoundException::new);
 		return a;
+	}
+	
+	@Override
+	public PatientDTO findPatients(Integer id) throws NotFoundException {
+		return patientService.patientToDTO(findById(id).getPatient());
+	}
+	
+	@Override
+	public ConsultationDTO findConsultations(Integer id) throws NotFoundException {
+		return consultationService.consultationToDTO(findById(id).getConsultation());
 	}
 
 	@Override

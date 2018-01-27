@@ -33,13 +33,13 @@ public class RoomController {
 	}
 	
 	@RequestMapping(method = {RequestMethod.POST})
-	public RoomDTO create(@RequestBody RoomDTO room) {
+	public RoomDTO create(@RequestBody RoomDTO room) throws NotFoundException {
 		return roomService.create(room);
 	}
 	
 	@RequestMapping(value = "/{id}",method = {RequestMethod.PUT})
 	public void update(@RequestBody RoomDTO room, 
-			@PathVariable("id") Integer id) {
+			@PathVariable("id") Integer id) throws NotFoundException {
 		roomService.update(room);
 	}
 	

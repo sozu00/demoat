@@ -1,9 +1,6 @@
 package com.jiniguez.demo.Service.Implementation;
 
-import java.text.DateFormat;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
+	import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
@@ -13,10 +10,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.jiniguez.demo.DAO.ConsultationDAO;
+import com.jiniguez.demo.DTO.AppointmentDTO;
 import com.jiniguez.demo.DTO.ConsultationDTO;
 import com.jiniguez.demo.DTO.DoctorDTO;
 import com.jiniguez.demo.Exceptions.NotFoundException;
 import com.jiniguez.demo.Model.Consultation;
+import com.jiniguez.demo.Service.AppointmentService;
 import com.jiniguez.demo.Service.ConsultationService;
 import com.jiniguez.demo.Service.DoctorService;
 import com.jiniguez.demo.Service.RoomService;
@@ -32,18 +31,23 @@ public class ConsultationServiceImpl implements ConsultationService {
 	
 	@Autowired
 	RoomService roomService;
+
+	@Autowired
+	private AppointmentService appointmentService;
 	
 	@Autowired
 	private DozerBeanMapper dozer;
 
-	private ConsultationDTO consultationToDTO(Consultation consultation) {
+	@Override
+	public ConsultationDTO consultationToDTO(Consultation consultation) {
 		return dozer.map(consultation, ConsultationDTO.class);
 	}
 	
-	private Consultation DTOToConsultation(ConsultationDTO consultation) throws NotFoundException {
-		Consultation c = new Consultation();
+	@Override
+	public Consultation DTOToConsultation(ConsultationDTO consultation) throws NotFoundException {
+		Consultation c = Optional.ofNullable(consultationDAO.findOne(consultation.getId())).orElse(new Consultation());
+		
 		c.setDay(new Date(Long.parseLong(consultation.getDay())));
-		c.setId(consultation.getId());
 		c.setTurn(consultation.getTurn());
 		c.setDoctor(doctorService.findById(consultation.getDoctor_id()));
 		c.setRoom(roomService.findById(consultation.getRoom_id()));
@@ -61,6 +65,14 @@ public class ConsultationServiceImpl implements ConsultationService {
         		.orElseThrow(() -> new NotFoundException());
 	}
 
+	@Override
+	public List<AppointmentDTO> findAppointments(Integer id) throws NotFoundException {
+		List<AppointmentDTO> apps = new ArrayList<>();
+		findById(id).getAppointments().forEach(a->{apps.add(appointmentService.appointmentToDTO(a));});
+		
+		return apps;
+	}
+	
 	@Override
 	public List<ConsultationDTO> findAll(Integer page, Integer size) {
 		final Iterable<Consultation> findAll = consultationDAO.findAll();

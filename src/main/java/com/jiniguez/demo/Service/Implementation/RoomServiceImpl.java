@@ -12,6 +12,7 @@ import com.jiniguez.demo.DAO.RoomDAO;
 import com.jiniguez.demo.DTO.RoomDTO;
 import com.jiniguez.demo.Exceptions.NotFoundException;
 import com.jiniguez.demo.Model.Room;
+import com.jiniguez.demo.Service.ClinicService;
 import com.jiniguez.demo.Service.RoomService;
 
 @Service
@@ -21,14 +22,22 @@ public class RoomServiceImpl implements RoomService {
 	RoomDAO roomDAO;
 	
 	@Autowired
+	ClinicService clinicService;
+	
+	@Autowired
 	private DozerBeanMapper dozer;
 
-	private RoomDTO roomToDTO(Room room) {
+	@Override
+	public RoomDTO roomToDTO(Room room) {
 		return dozer.map(room, RoomDTO.class);
 	}
 	
-	private Room DTOToRoom(RoomDTO room) {
-		return dozer.map(room, Room.class);
+	@Override
+	public Room DTOToRoom(RoomDTO room) throws NotFoundException {
+		Room r = Optional.ofNullable(roomDAO.findOne(room.getId())).orElse(new Room());
+		r.setClinic(clinicService.findById(room.getClinic_id()));
+		r.setRoomNumber(room.getRoomNumber());
+		return r;
 	}
 	
 	@Override
@@ -54,13 +63,13 @@ public class RoomServiceImpl implements RoomService {
 	}
 	
 	@Override
-	public RoomDTO create(RoomDTO room) {
+	public RoomDTO create(RoomDTO room) throws NotFoundException {
 		final Room a = DTOToRoom(room);
 		return roomToDTO(roomDAO.save(a));
 	}
 
 	@Override
-	public void update(RoomDTO room) {
+	public void update(RoomDTO room) throws NotFoundException {
 		final Room a = DTOToRoom(room);
 		roomDAO.save(a);		
 	}

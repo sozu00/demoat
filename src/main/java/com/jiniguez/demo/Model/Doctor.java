@@ -17,9 +17,6 @@ import lombok.Data;
 @Data
 public class Doctor  implements Serializable{
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = -3679617798573006151L;
 
 	@Id
@@ -29,14 +26,12 @@ public class Doctor  implements Serializable{
 	
 	private String name;
 	
-//	@Column(unique=true)
 	private String email;
 	
 	@OneToMany(fetch = FetchType.LAZY, mappedBy="doctor")
 	private List<Consultation> consultations = new ArrayList<Consultation>();
 	
 	public String toString(){
-//		return String.format("Doctor [id=%d, name=%s, email=%s]",id, name, email);
 		return id.toString();
 	}
 }

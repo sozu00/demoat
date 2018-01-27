@@ -11,6 +11,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.jiniguez.demo.DTO.ClinicDTO;
+import com.jiniguez.demo.DTO.DoctorDTO;
+import com.jiniguez.demo.DTO.PatientDTO;
+import com.jiniguez.demo.DTO.RoomDTO;
 import com.jiniguez.demo.Exceptions.NotFoundException;
 import com.jiniguez.demo.Service.ClinicService;
 
@@ -20,12 +23,30 @@ public class ClinicController {
 	
 	@Autowired
 	private ClinicService clinicService;
-	
+		
 	@RequestMapping(method = { RequestMethod.GET })
 	public List<ClinicDTO> findAll(@RequestParam(required=false) Integer page,
 			@RequestParam(required = false) Integer size){
 		return clinicService.findAll(page, size);
 	}
+	
+	@RequestMapping(value= "/{id}/patients", method = { RequestMethod.GET })
+	public List<PatientDTO> findPatients(@PathVariable Integer id) throws NotFoundException{
+		return clinicService.findPatients(id);
+	}
+
+	
+	@RequestMapping(value= "/{id}/doctors", method = { RequestMethod.GET })
+	public List<DoctorDTO> findDoctors(@PathVariable Integer id) throws NotFoundException{
+		return clinicService.findDoctors(id);
+	}
+	
+	@RequestMapping(value= "/{id}/rooms", method = { RequestMethod.GET })
+	public List<RoomDTO> findRooms(@PathVariable Integer id) throws NotFoundException{
+		
+		return clinicService.findRooms(id);
+	}
+
 	
 	@RequestMapping(value = "/{id}", method = { RequestMethod.GET })
 	public ClinicDTO findOneById(@PathVariable Integer id) throws NotFoundException {

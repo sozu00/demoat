@@ -25,6 +25,7 @@ public class Appointment implements Serializable{
 	private static final long serialVersionUID = -1397176648342175197L;
 
 	@Id
+	@GeneratedValue
 	private Integer id;
 	
     @GeneratedValue(strategy=GenerationType.SEQUENCE, generator="seq")
@@ -39,7 +40,6 @@ public class Appointment implements Serializable{
 	private Consultation consultation;
 	
 	public String toString() {
-//		return String.format("Appointment [id=%d, position=%d]",id, position);
 		return id.toString();
 	}
 }

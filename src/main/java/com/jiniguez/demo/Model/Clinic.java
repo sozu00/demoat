@@ -22,13 +22,13 @@ public class Clinic  implements Serializable{
 	@GeneratedValue
 	private Integer id;
 	
+	private String name;
+	
 	@OneToMany(fetch = FetchType.LAZY, mappedBy="clinic")
 	private List<Room>rooms = new ArrayList<Room>();
 
 	public String toString(){
-//		return String.format("Clinic [id=%d]",id);
 		return id.toString();
 	}
-
 }
 

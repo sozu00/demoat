@@ -1,6 +1,5 @@
 package com.jiniguez.demo.Controller;
 
-import java.text.ParseException;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.jiniguez.demo.DTO.AppointmentDTO;
 import com.jiniguez.demo.DTO.ConsultationDTO;
 import com.jiniguez.demo.Exceptions.NotFoundException;
 import com.jiniguez.demo.Service.ConsultationService;
@@ -31,6 +31,11 @@ public class ConsultationController {
 	@RequestMapping(value = "/{id}", method = { RequestMethod.GET })
 	public ConsultationDTO findOneById(@PathVariable Integer id) throws NotFoundException {
 		return consultationService.findDTOById(id);
+	}
+	
+	@RequestMapping(value = "/{id}/appointments", method = { RequestMethod.GET })
+	public List<AppointmentDTO> findAppointments(@PathVariable Integer id) throws NotFoundException {
+		return consultationService.findAppointments(id);
 	}
 	
 	@RequestMapping(method = {RequestMethod.POST})

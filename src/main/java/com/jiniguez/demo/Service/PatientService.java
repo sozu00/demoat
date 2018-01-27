@@ -22,5 +22,9 @@ public interface PatientService {
 	List<AppointmentDTO> findAppointments(Integer id) throws NotFoundException;
 
 	PatientDTO findDTOById(Integer id) throws NotFoundException;
+
+	PatientDTO patientToDTO(Patient patient);
+
+	Patient DTOTopatient(PatientDTO patient);
 	
 }

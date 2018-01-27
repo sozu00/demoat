@@ -50,7 +50,6 @@ public class Consultation implements Serializable {
 	private Turn turn;
 	
 	public String toString(){
-//		return String.format("Consultation [id=%d]", id);
 		return id.toString();
 	}
 }

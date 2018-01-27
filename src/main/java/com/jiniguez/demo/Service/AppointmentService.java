@@ -3,6 +3,8 @@ package com.jiniguez.demo.Service;
 import java.util.List;
 
 import com.jiniguez.demo.DTO.AppointmentDTO;
+import com.jiniguez.demo.DTO.ConsultationDTO;
+import com.jiniguez.demo.DTO.PatientDTO;
 import com.jiniguez.demo.Exceptions.NotFoundException;
 import com.jiniguez.demo.Model.Appointment;
 
@@ -47,6 +49,14 @@ public interface AppointmentService {
 	void delete(Integer id);
 
 	AppointmentDTO findDTOById(Integer id) throws NotFoundException;
+
+	Appointment DTOToAppointment(AppointmentDTO appointment) throws NotFoundException;
+
+	AppointmentDTO appointmentToDTO(Appointment appointment);
+
+	PatientDTO findPatients(Integer id) throws NotFoundException;
+
+	ConsultationDTO findConsultations(Integer id) throws NotFoundException;
 
 	
 //	@Query(value = "from User u where u.name like :name")

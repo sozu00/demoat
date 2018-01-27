@@ -68,7 +68,7 @@ public class TestRoomController {
 	}
 	
 	@Test
-	public void TestCreate() {
+	public void TestCreate() throws NotFoundException {
 		RoomDTO result = roomController.create(roomDTO);
 		
 		Assert.assertNotNull(result);

@@ -1,11 +1,8 @@
 package com.jiniguez.demo.Controller;
 
-import static org.junit.Assert.*;
-
 import java.util.ArrayList;
 import java.util.List;
 
-import org.dozer.DozerBeanMapper;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -14,25 +11,22 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.runners.MockitoJUnitRunner;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 
-import com.jiniguez.demo.DAO.DoctorDAO;
 import com.jiniguez.demo.DTO.AppointmentDTO;
 import com.jiniguez.demo.Exceptions.NotFoundException;
 import com.jiniguez.demo.Service.AppointmentService;
-import com.jiniguez.demo.Service.DoctorService;
-import com.jiniguez.demo.Service.Implementation.DoctorServiceImpl;
 
 @RunWith(MockitoJUnitRunner.class)
 public class TestAppointmentController {
 
+	
+	/*
+	 * Cambiar tests a casoSS base y casoSS excepcionales
+	 * 
+	 */
 	private static final Integer ID = 1;
 	private static final Integer POSITION = 1;
+	private static final Integer IDEXCEPTION = 999;
 	private static Integer PAGE = 1;
 	private static Integer SIZE = 10;
 	private AppointmentDTO appointmentDTO = new AppointmentDTO();
@@ -51,14 +45,14 @@ public class TestAppointmentController {
 		appointmentDTO.setPatient_id(ID);
 		appointmentDTO.setConsultation_id(ID);
 		
-		appointmentDTOException.setId(1);
-		appointmentDTOException.setPosition(1);
-		appointmentDTOException.setPatient_id(9999);
+		appointmentDTOException.setId(ID);
+		appointmentDTOException.setPosition(ID);
+		appointmentDTOException.setPatient_id(IDEXCEPTION);
 		
 		listDTO.add(appointmentDTO);
 		Mockito.when(appointmentService.findAll(PAGE, SIZE)).thenReturn(listDTO);
 		Mockito.when(appointmentService.findDTOById(ID)).thenReturn(appointmentDTO);
-		Mockito.when(appointmentService.findDTOById(-1)).thenThrow(new NotFoundException());
+		Mockito.when(appointmentService.findDTOById(IDEXCEPTION)).thenThrow(new NotFoundException());
 		Mockito.doNothing().when(appointmentService).update(appointmentDTO);
 		Mockito.doNothing().when(appointmentService).delete(ID);
 		Mockito.when(appointmentService.create(appointmentDTO)).thenReturn(appointmentDTO);
@@ -69,12 +63,12 @@ public class TestAppointmentController {
 	public void testFindAll(){
 		List<AppointmentDTO> result = appointmentController.findAll(PAGE, SIZE);
 		
-		Assert.assertEquals(result.get(0).getId(),listDTO.get(0).getId());
+		Assert.assertEquals(result.get(0).getId(),ID);
 	}
 	
 	@Test(expected = NotFoundException.class)
 	public void TestfindOneByIdException() throws NotFoundException {
-		appointmentController.findOneById(-1);
+		appointmentController.findOneById(IDEXCEPTION);
 	}
 	
 	@Test

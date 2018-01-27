@@ -11,12 +11,16 @@ public interface RoomService {
 
 	List<RoomDTO> findAll(Integer page, Integer size);
 
-	RoomDTO create(RoomDTO room);
+	RoomDTO create(RoomDTO room) throws NotFoundException;
 
-	void update(RoomDTO room);
+	void update(RoomDTO room) throws NotFoundException;
 
 	void delete(Integer id);
 
 	RoomDTO findDTOById(Integer id) throws NotFoundException;
+
+	RoomDTO roomToDTO(Room room);
+
+	Room DTOToRoom(RoomDTO room) throws NotFoundException;
 	
 }

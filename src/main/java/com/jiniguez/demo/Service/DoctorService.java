@@ -1,7 +1,10 @@
 package com.jiniguez.demo.Service;
 
 import java.util.List;
+
+import com.jiniguez.demo.DTO.ConsultationDTO;
 import com.jiniguez.demo.DTO.DoctorDTO;
+import com.jiniguez.demo.DTO.PatientDTO;
 import com.jiniguez.demo.Exceptions.NotFoundException;
 import com.jiniguez.demo.Model.Doctor;
 
@@ -22,5 +25,13 @@ public interface DoctorService {
 	List<DoctorDTO> findTopNDoctorsWithMorePatients(Integer num);
 
 	DoctorDTO findDTOById(Integer id) throws NotFoundException;
+
+	DoctorDTO doctorToDTO(Doctor doctor);
+
+	Doctor DTOToDoctor(DoctorDTO doctor);
+
+	List<PatientDTO> findPatients(Integer id) throws NotFoundException;
+
+	List<ConsultationDTO> findConsultations(Integer id) throws NotFoundException;
 
 }

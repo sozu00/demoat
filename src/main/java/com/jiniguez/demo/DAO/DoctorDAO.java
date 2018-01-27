@@ -3,16 +3,16 @@ package com.jiniguez.demo.DAO;
 import java.util.List;
 
 import org.springframework.data.jpa.repository.Query;
-import org.springframework.data.repository.CrudRepository;
-import org.springframework.data.repository.query.Param;
+import org.springframework.data.repository.PagingAndSortingRepository;
 import org.springframework.stereotype.Repository;
 
-import com.jiniguez.demo.DTO.DoctorDTO;
 import com.jiniguez.demo.Model.Doctor;
 
 @Repository
-public interface DoctorDAO extends CrudRepository<Doctor, Integer>{
+public interface DoctorDAO extends PagingAndSortingRepository<Doctor, Integer>{
 
+	//Anadir pagingAndSorting<Doctor, Integer> en el extends
+	
 	@Query(value = "select d from Doctor d  "
 			+ " join d.consultations c "
 			+ " join c.appointments a"

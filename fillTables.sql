@@ -15,7 +15,7 @@ BEGIN
     DECLARE i int DEFAULT 1;
     set i = 1;
     WHILE i <= 10 DO
-        INSERT INTO doctor (id, email, name) VALUES (i, '@gmail.com', 'Doctor');
+        INSERT INTO doctor (email, name) VALUES ('@gmail.com', 'Doctor');
         SET i = i + 1;
     END WHILE;
 END$$
@@ -27,7 +27,7 @@ CREATE PROCEDURE createPatient()
 BEGIN
 	DECLARE i int DEFAULT 1;
     WHILE i <= 10 DO
-        INSERT INTO patient (id, name) VALUES (i, 'Paciente');
+        INSERT INTO patient (name) VALUES ('Paciente');
         SET i = i + 1;
     END WHILE;
 END$$
@@ -49,7 +49,7 @@ CREATE PROCEDURE createRooms()
 BEGIN
     DECLARE i int DEFAULT 1;
     WHILE i <= 10 DO
-        INSERT INTO room(id, room_number, clinic_id) VALUES (i, i, i);
+        INSERT INTO room(room_number, clinic_id) VALUES (i, i);
         SET i = i + 1;
     END WHILE;
 END$$
@@ -60,7 +60,7 @@ CREATE PROCEDURE createConsultations()
 BEGIN
     DECLARE i int DEFAULT 1;
     WHILE i <= 10 DO
-        INSERT INTO consultation(id, day, turn, doctor_id, room_id) VALUES (i, curdate(),"M", i,i);
+        INSERT INTO consultation(day, turn, doctor_id, room_id) VALUES (curdate(),"M", i,i);
         SET i = i + 1;
     END WHILE;
 END$$
@@ -71,7 +71,7 @@ CREATE PROCEDURE createAppointment()
 BEGIN
     DECLARE i int DEFAULT 1;
     WHILE i <= 10 DO
-        INSERT INTO appointment(id, position, consultation_id, patient_id) VALUES (i, i,i,i);
+        INSERT INTO appointment(consultation_id, patient_id) VALUES (i,i);
         SET i = i + 1;
     END WHILE;
 END$$

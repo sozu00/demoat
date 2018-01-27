@@ -16,9 +16,6 @@ import lombok.Data;
 @Data
 public class Patient  implements Serializable{
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = -932718505061616273L;
 
 	@Id
@@ -31,7 +28,6 @@ public class Patient  implements Serializable{
 	private List<Appointment> appointments = new ArrayList<Appointment>();
 	
 	public String toString(){
-//		return String.format("Patient [id=%d, name=%s]",id, name);
 		return id.toString();
 	}
 }
