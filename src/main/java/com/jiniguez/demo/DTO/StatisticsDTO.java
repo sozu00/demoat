@@ -1,12 +1,9 @@
 package com.jiniguez.demo.DTO;
 
-import lombok.Data;
-
-@Data
 public class StatisticsDTO {
 
 	private Integer doctorID;
-	
+
 	private Integer consultationsAmount;
 	
 	private Double totalPrice;
@@ -26,5 +23,29 @@ public class StatisticsDTO {
 		consultationsAmount = totalConsultations;
 		this.doctorID = doctorID;
 		this.totalPrice = price;
+	}
+	
+	public Integer getDoctorID() {
+		return doctorID;
+	}
+
+	public void setDoctorID(Integer doctorID) {
+		this.doctorID = doctorID;
+	}
+
+	public Integer getConsultationsAmount() {
+		return consultationsAmount;
+	}
+
+	public void setConsultationsAmount(Integer consultationsAmount) {
+		this.consultationsAmount = consultationsAmount;
+	}
+
+	public Double getTotalPrice() {
+		return totalPrice;
+	}
+
+	public void setTotalPrice(Double totalPrice) {
+		this.totalPrice = totalPrice;
 	}
 }

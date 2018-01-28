@@ -10,6 +10,7 @@ import org.dozer.DozerBeanMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.jiniguez.demo.Config.Constants;
 import com.jiniguez.demo.Config.CustomPageRequest;
 import com.jiniguez.demo.DAO.ClinicDAO;
 import com.jiniguez.demo.DTO.ClinicDTO;
@@ -48,7 +49,12 @@ public class ClinicServiceImpl implements ClinicService {
 	
 	@Override
 	public Clinic DTOToClinic(ClinicDTO clinic) {
-		Clinic c = Optional.ofNullable(clinicDAO.findOne(clinic.getId())).orElse(new Clinic());
+		Clinic c = clinicDAO.findOne(Optional.ofNullable(clinic.getId()).orElse(Constants.NOT_FINDABLE_ID));
+		
+		if(c == null)
+			c = new Clinic();
+		
+		c.setId(clinic.getId());
 		c.setName(clinic.getName());
 		return c;
 	}

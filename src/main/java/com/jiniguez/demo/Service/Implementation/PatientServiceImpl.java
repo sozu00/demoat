@@ -8,6 +8,7 @@ import org.dozer.DozerBeanMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.jiniguez.demo.Config.Constants;
 import com.jiniguez.demo.Config.CustomPageRequest;
 import com.jiniguez.demo.DAO.PatientDAO;
 import com.jiniguez.demo.DTO.AppointmentDTO;
@@ -36,8 +37,13 @@ public class PatientServiceImpl implements PatientService {
 	}
 	
 	@Override
-	public Patient DTOTopatient(PatientDTO patient) {
-		Patient p = Optional.ofNullable(patientDAO.findOne(patient.getId())).orElse(new Patient());
+	public Patient DTOToPatient(PatientDTO patient) {
+		Patient p = patientDAO.findOne(Optional.ofNullable(patient.getId()).orElse(Constants.NOT_FINDABLE_ID));
+		
+		if(p == null)
+			p = new Patient();
+		
+		p.setId(patient.getId());
 		p.setName(patient.getName());
 		
 		return p;
@@ -67,13 +73,13 @@ public class PatientServiceImpl implements PatientService {
 	
 	@Override
 	public PatientDTO create(PatientDTO patient) {
-		final Patient a = DTOTopatient(patient);
+		final Patient a = DTOToPatient(patient);
 		return patientToDTO(patientDAO.save(a));
 	}
 
 	@Override
 	public void update(PatientDTO patient) {
-		final Patient a = DTOTopatient(patient);
+		final Patient a = DTOToPatient(patient);
 		patientDAO.save(a);		
 	}
 

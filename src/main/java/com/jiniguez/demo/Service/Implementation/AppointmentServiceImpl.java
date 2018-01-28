@@ -8,6 +8,7 @@ import org.dozer.DozerBeanMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.jiniguez.demo.Config.Constants;
 import com.jiniguez.demo.Config.CustomPageRequest;
 import com.jiniguez.demo.DAO.AppointmentDAO;
 import com.jiniguez.demo.DTO.AppointmentDTO;
@@ -42,7 +43,10 @@ public class AppointmentServiceImpl implements AppointmentService {
 	@Override
 	public Appointment DTOToAppointment(AppointmentDTO appointment) throws NotFoundException {
 		
-		Appointment a = Optional.ofNullable(appointmentDAO.findOne(appointment.getId())).orElse(new Appointment());
+		Appointment a = appointmentDAO.findOne(Optional.ofNullable(appointment.getId()).orElse(Constants.NOT_FINDABLE_ID));
+		
+		if(a == null)
+			a = new Appointment();
 		
 		a.setPosition(appointment.getPosition());
 		a.setPatient(patientService.findById(appointment.getPatient_id()));

@@ -36,7 +36,9 @@ public interface DoctorService {
 
 	List<ConsultationDTO> findConsultations(Integer id) throws NotFoundException;
 
-	List<StatisticsDTO> getStats(String initDate, String endDate) throws NotFoundException, ParseException;
+	List<StatisticsDTO> getStats(String initDate, String endDate) throws ParseException;
 
 	Doctor findByExternalId(String externalID);
+
+	void init();
 }

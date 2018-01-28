@@ -1,7 +1,6 @@
 package com.jiniguez.demo.Service.Implementation;
 
-	import java.text.ParseException;
-import java.text.SimpleDateFormat;
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -9,6 +8,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.jiniguez.demo.Config.Constants;
 import com.jiniguez.demo.Config.CustomPageRequest;
 import com.jiniguez.demo.DAO.ConsultationDAO;
 import com.jiniguez.demo.DTO.AppointmentDTO;
@@ -39,9 +39,8 @@ public class ConsultationServiceImpl implements ConsultationService {
 	@Override
 	public ConsultationDTO consultationToDTO(Consultation consultation) {
 		ConsultationDTO c = new ConsultationDTO();
-		SimpleDateFormat s = new SimpleDateFormat("DD-MM-YY");
 
-		c.setDay(s.format(consultation.getDay()));
+		c.setDay(Constants.DATEFORMAT.format(consultation.getDay()));
 		c.setTurn(consultation.getTurn());
 		c.setDoctor_internal_id(consultation.getDoctor().getInternalId());
 		c.setId(consultation.getId());
@@ -52,12 +51,15 @@ public class ConsultationServiceImpl implements ConsultationService {
 	
 	@Override
 	public Consultation DTOToConsultation(ConsultationDTO consultation) throws NotFoundException, ParseException {
-		Consultation c = Optional.ofNullable(consultationDAO.findOne(consultation.getId())).orElse(new Consultation());
-		SimpleDateFormat s = new SimpleDateFormat("DD-MM-YY");
+		Consultation c = consultationDAO.findOne(Optional.ofNullable(consultation.getId()).orElse(Constants.NOT_FINDABLE_ID));
+		
+		if(c == null)
+			c = new Consultation();
 
-		c.setDay(s.parse(consultation.getDay()));
+		c.setDay(Constants.DATEFORMAT.parse(consultation.getDay()));
 		c.setTurn(consultation.getTurn());
 		c.setDoctor(doctorService.findById(consultation.getDoctor_internal_id()));
+		c.setId(consultation.getId());
 		c.setRoom(roomService.findById(consultation.getRoom_id()));
 		return c;
 	}

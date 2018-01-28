@@ -25,6 +25,6 @@ public interface PatientService {
 
 	PatientDTO patientToDTO(Patient patient);
 
-	Patient DTOTopatient(PatientDTO patient);
+	Patient DTOToPatient(PatientDTO patient);
 	
 }

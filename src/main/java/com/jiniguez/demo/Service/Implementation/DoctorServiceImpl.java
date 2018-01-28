@@ -18,6 +18,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
+import com.jiniguez.demo.Config.Constants;
 import com.jiniguez.demo.Config.CustomPageRequest;
 import com.jiniguez.demo.DAO.DoctorDAO;
 import com.jiniguez.demo.DTO.ConsultationDTO;
@@ -33,11 +34,6 @@ import com.jiniguez.demo.Service.PatientService;
 
 @Service
 public class DoctorServiceImpl implements DoctorService {
-
-	/**
-	 * Para evitar casos en los que se envia un ID null y no es posible buscarlo, se usa esta constante, que nunca debe ser asignada.
-	 */
-	private static final int NOT_FINDABLE_ID = -1;
 
 	@Autowired
 	DoctorDAO doctorDAO;
@@ -55,6 +51,7 @@ public class DoctorServiceImpl implements DoctorService {
 	private DozerBeanMapper dozer;
 
 	@PostConstruct
+	@Override
 	public void init() {
 		loadExternalData();
 	}
@@ -67,12 +64,13 @@ public class DoctorServiceImpl implements DoctorService {
 	
 	@Override
 	public Doctor DTOToDoctor(DoctorDTO doctorDTO) {	
-		Doctor doctor = doctorDAO.findOne(Optional.ofNullable(doctorDTO.getInternalId()).orElse(NOT_FINDABLE_ID));
+		Doctor doctor = doctorDAO.findOne(Optional.ofNullable(doctorDTO.getInternalId()).orElse(Constants.NOT_FINDABLE_ID));
 		
 		//Si no existe el doctor, creo uno.
 		if(doctor == null)
 			doctor = new Doctor();
 		
+		doctor.setInternalId(doctorDTO.getInternalId());
 		doctor.setId(doctorDTO.getId());
 		doctor.setName(doctorDTO.getName());
 		doctor.setEmail(doctorDTO.getEmail());
@@ -173,10 +171,10 @@ public class DoctorServiceImpl implements DoctorService {
 	}
 
 	@Override
-	public List<StatisticsDTO> getStats(String initDate, String endDate) throws NotFoundException, ParseException {
+	public List<StatisticsDTO> getStats(String initDate, String endDate) throws ParseException {
 		List<StatisticsDTO> statisticList = new ArrayList<>();
 		
-		SimpleDateFormat s = new SimpleDateFormat("DD-MM-YY");
+		SimpleDateFormat s = new SimpleDateFormat("DD-MM-YYYY");
 		
 		List<Consultation> consultations = consultationService.findAll();
 		
@@ -189,7 +187,7 @@ public class DoctorServiceImpl implements DoctorService {
 		return statisticList;
 	}
 
-	private void addConsultationStats(List<StatisticsDTO> statisticList, Consultation consultation) {
+	public void addConsultationStats(List<StatisticsDTO> statisticList, Consultation consultation) {
 		Double price = consultation.getDoctor().getPrice() * consultation.getAppointments().size();
 		Integer doctorID = consultation.getDoctor().getInternalId();
 		Integer totalConsultations = 1;
@@ -207,7 +205,7 @@ public class DoctorServiceImpl implements DoctorService {
 	}
 
 	
-	private void loadExternalData() {
+	public void loadExternalData() {
 		DoctorDTO[] doctors;
 		int j = 0;
 
@@ -222,7 +220,7 @@ public class DoctorServiceImpl implements DoctorService {
 	}
 
 
-	private void createAllDoctors(DoctorDTO[] doctors) {
+	public void createAllDoctors(DoctorDTO[] doctors) {
 		for (int i = 0; i < doctors.length; i++) {
 			doctors[i] = restTemplate.getForObject("http://doctor.dbgjerez.es:8080/api/doctor/"+doctors[i].getId(), DoctorDTO.class);
 			if(doctorDAO.findOneByExternalID(doctors[i].getId()) == null)
@@ -230,7 +228,7 @@ public class DoctorServiceImpl implements DoctorService {
 		}
 	}
 
-	private boolean isBetween(Date dateToCheck, Date initDate, Date endDate) {
+	public boolean isBetween(Date dateToCheck, Date initDate, Date endDate) {
 		return !dateToCheck.before(initDate) && !dateToCheck.after(endDate);
 	}
 

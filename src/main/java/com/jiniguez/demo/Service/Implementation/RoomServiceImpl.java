@@ -8,6 +8,7 @@ import org.dozer.DozerBeanMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.jiniguez.demo.Config.Constants;
 import com.jiniguez.demo.Config.CustomPageRequest;
 import com.jiniguez.demo.DAO.RoomDAO;
 import com.jiniguez.demo.DTO.RoomDTO;
@@ -35,9 +36,15 @@ public class RoomServiceImpl implements RoomService {
 	
 	@Override
 	public Room DTOToRoom(RoomDTO room) throws NotFoundException {
-		Room r = Optional.ofNullable(roomDAO.findOne(room.getId())).orElse(new Room());
+		Room r = roomDAO.findOne(Optional.ofNullable(room.getId()).orElse(Constants.NOT_FINDABLE_ID));
+		
+		if(r == null)
+			r = new Room();
+		
 		r.setClinic(clinicService.findById(room.getClinic_id()));
 		r.setRoomNumber(room.getRoomNumber());
+		r.setId(room.getId());
+		
 		return r;
 	}
 	
