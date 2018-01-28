@@ -84,7 +84,7 @@ public class TestDoctorController {
 	public void TestfindByName() {
 		List<DoctorDTO> result = doctorController.findByName(NAME);
 		
-		Assert.assertEquals(result.get(0).getId(), ID);
+		Assert.assertEquals(result.get(0).getInternalId(), ID);
 	}
 	
 	@Test

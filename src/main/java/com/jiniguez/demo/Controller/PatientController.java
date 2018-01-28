@@ -15,8 +15,11 @@ import com.jiniguez.demo.DTO.PatientDTO;
 import com.jiniguez.demo.Exceptions.NotFoundException;
 import com.jiniguez.demo.Service.PatientService;
 
+import lombok.extern.java.Log;
+
 @RestController
 @RequestMapping(value = "api/patient")
+@Log
 public class PatientController {
 	
 	@Autowired
@@ -25,16 +28,19 @@ public class PatientController {
 	@RequestMapping(method = { RequestMethod.GET })
 	public List<PatientDTO> findAll(@RequestParam(required=false) Integer page,
 			@RequestParam(required = false) Integer size){
+		log.info("Buscando todos los pacientes");
 		return patientService.findAll(page, size);
 	}
 	
 	@RequestMapping(value = "/{id}", method = { RequestMethod.GET })
 	public PatientDTO findOneById(@PathVariable Integer id) throws NotFoundException {
+		log.info("Buscando el paciente con id = "+id);
 		return patientService.findDTOById(id);
 	}
 	
 	@RequestMapping(value = "/{id}/appointment", method = { RequestMethod.GET })
 	public List<AppointmentDTO> findAppointments(@PathVariable Integer id) throws NotFoundException {
+		log.info("Buscando las citas del paciente con id = "+id);
 		return patientService.findAppointments(id);
 	}
 	

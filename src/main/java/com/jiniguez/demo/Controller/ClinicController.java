@@ -17,8 +17,11 @@ import com.jiniguez.demo.DTO.RoomDTO;
 import com.jiniguez.demo.Exceptions.NotFoundException;
 import com.jiniguez.demo.Service.ClinicService;
 
+import lombok.extern.java.Log;
+
 @RestController
 @RequestMapping(value = "api/clinic")
+@Log
 public class ClinicController {
 	
 	@Autowired
@@ -27,29 +30,33 @@ public class ClinicController {
 	@RequestMapping(method = { RequestMethod.GET })
 	public List<ClinicDTO> findAll(@RequestParam(required=false) Integer page,
 			@RequestParam(required = false) Integer size){
+		log.info("Buscando todas las clinicas");
 		return clinicService.findAll(page, size);
 	}
 	
 	@RequestMapping(value= "/{id}/patients", method = { RequestMethod.GET })
 	public List<PatientDTO> findPatients(@PathVariable Integer id) throws NotFoundException{
+		log.info("Buscando los paciente de la clinica con id = "+id);
 		return clinicService.findPatients(id);
 	}
 
 	
 	@RequestMapping(value= "/{id}/doctors", method = { RequestMethod.GET })
 	public List<DoctorDTO> findDoctors(@PathVariable Integer id) throws NotFoundException{
+		log.info("Buscando los doctores de la clinica con id = "+id);
 		return clinicService.findDoctors(id);
 	}
 	
 	@RequestMapping(value= "/{id}/rooms", method = { RequestMethod.GET })
 	public List<RoomDTO> findRooms(@PathVariable Integer id) throws NotFoundException{
-		
+		log.info("Buscando las habitaciones de la clinica con id = "+id);
 		return clinicService.findRooms(id);
 	}
 
 	
 	@RequestMapping(value = "/{id}", method = { RequestMethod.GET })
 	public ClinicDTO findOneById(@PathVariable Integer id) throws NotFoundException {
+		log.info("Buscando la clinica con id = "+id);
 		return clinicService.findDTOById(id);
 	}
 	

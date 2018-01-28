@@ -29,22 +29,25 @@ public class AppointmentController {
 	@RequestMapping(method = { RequestMethod.GET })
 	public List<AppointmentDTO> findAll(@RequestParam(required=false) Integer page,
 			@RequestParam(required = false) Integer size){
-		log.info("Buscando todos los usuarios");
+		log.info("Buscando todas las citas");
 		return appointmentService.findAll(page, size);
 	}
 	
 	@RequestMapping(value = "/{id}", method = { RequestMethod.GET })
 	public AppointmentDTO findOneById(@PathVariable Integer id) throws NotFoundException {
+		log.info("Buscando la cita con id = "+id);
 		return appointmentService.findDTOById(id);
 	}
 	
 	@RequestMapping(value = "/{id}/patient", method = { RequestMethod.GET })
 	public PatientDTO findPatient(@PathVariable Integer id) throws NotFoundException {
+		log.info("Buscando los paciente de la cita con id = "+id);
 		return appointmentService.findPatients(id);
 	}
 
 	@RequestMapping(value = "/{id}/consultation", method = { RequestMethod.GET })
 	public ConsultationDTO findConsultation(@PathVariable Integer id) throws NotFoundException {
+		log.info("Buscando las consultas de la cita con id = "+id);
 		return appointmentService.findConsultations(id);
 	}
 	

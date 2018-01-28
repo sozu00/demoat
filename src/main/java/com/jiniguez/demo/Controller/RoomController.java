@@ -14,8 +14,11 @@ import com.jiniguez.demo.DTO.RoomDTO;
 import com.jiniguez.demo.Exceptions.NotFoundException;
 import com.jiniguez.demo.Service.RoomService;
 
+import lombok.extern.java.Log;
+
 @RestController
 @RequestMapping(value = "api/room")
+@Log
 public class RoomController {
 	
 	@Autowired
@@ -24,11 +27,13 @@ public class RoomController {
 	@RequestMapping(method = { RequestMethod.GET })
 	public List<RoomDTO> findAll(@RequestParam(required=false) Integer page,
 			@RequestParam(required = false) Integer size){
+		log.info("Buscando todas las habitaciones");
 		return roomService.findAll(page, size);
 	}
 	
 	@RequestMapping(value = "/{id}", method = { RequestMethod.GET })
 	public RoomDTO findOneById(@PathVariable Integer id) throws NotFoundException {
+		log.info("Buscando la habitacion con id = "+id);
 		return roomService.findDTOById(id);
 	}
 	
